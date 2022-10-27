@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.androidboosttraining.databinding.ActivityMainBinding
 import com.example.androidboosttraining.consulta_api.Ficha
 import com.example.androidboosttraining.consulta_api.FichaDBClient
@@ -19,7 +20,8 @@ class MainActivity : AppCompatActivity() {
         ) {
             navigateTo(it)
         }
-
+        val manager = GridLayoutManager(this, 1)
+        binding.recycler.layoutManager = manager
         binding.recycler.adapter = fichasAdapter
 
         lifecycleScope.launch {

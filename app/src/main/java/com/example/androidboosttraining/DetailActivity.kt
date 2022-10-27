@@ -3,7 +3,10 @@ package com.example.androidboosttraining
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.constraintlayout.widget.ConstraintSet
+import androidx.constraintlayout.widget.ConstraintSet.Layout
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import com.example.androidboosttraining.databinding.ActivityDetailBinding
 import com.example.androidboosttraining.consulta_api_detalle.DetalleDBClient
@@ -17,9 +20,14 @@ class DetailActivity : AppCompatActivity() {
         val binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val galeriaAdapter = GaleriaAdapter(emptyList())
-
+        val galeriaAdapter = GaleriaAdapter(
+            emptyList()
+        )
+        // A la hora de crear el recyclerView, es conveniente indicar el layaout y el adapter
+        val manager =  GridLayoutManager(this,1)
+        binding.recyclerGaleria.layoutManager = manager
         binding.recyclerGaleria.adapter = galeriaAdapter
+
         val extras = intent.extras
         val idFicha = extras?.getInt("idFicha") ?: -1
         if (idFicha != null) {
