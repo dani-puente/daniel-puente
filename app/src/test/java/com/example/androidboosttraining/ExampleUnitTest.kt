@@ -1,4 +1,4 @@
-package com.example.prueba_acceso_movilidad_proconsi
+package com.example.androidboosttraining
 
 import org.junit.Test
 
