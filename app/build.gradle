@@ -45,7 +45,6 @@ dependencies {
 
     //con estas dos implementaciones podemos procesar imagenes a traves de la web
     implementation 'com.github.bumptech.glide:glide:4.14.2'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.14.2'
     //implementaciones para peticiones a API
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
