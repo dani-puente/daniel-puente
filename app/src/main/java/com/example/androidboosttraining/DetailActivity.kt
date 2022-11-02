@@ -3,8 +3,6 @@ package com.example.androidboosttraining
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import androidx.constraintlayout.widget.ConstraintSet
-import androidx.constraintlayout.widget.ConstraintSet.Layout
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
@@ -24,16 +22,26 @@ class DetailActivity : AppCompatActivity() {
             emptyList()
         )
         // A la hora de crear el recyclerView, es conveniente indicar el layaout y el adapter
-        val manager =  GridLayoutManager(this,1)
+        val manager = GridLayoutManager(this, 1)
         binding.recyclerGaleria.layoutManager = manager
         binding.recyclerGaleria.adapter = galeriaAdapter
 
         val extras = intent.extras
         val idFicha = extras?.getInt("idFicha") ?: null
         val tituloActBar = extras?.getString("tituloActBar") ?: null
-        if (tituloActBar != null){
+        var guardado = false
+        binding.fab.setOnClickListener {
+            if (guardado == true) {
+                binding.fab.setImageResource(R.drawable.ic_fav_vacio)
+                guardado = false
+            } else {
+                binding.fab.setImageResource(R.drawable.ic_fav_lleno)
+                guardado = true
+            }
+        }
+        if (tituloActBar != null) {
             title = tituloActBar
-        }else{
+        } else {
             title = "null"
         }
         if (idFicha != null) {
@@ -59,3 +67,4 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 }
+
