@@ -7,36 +7,85 @@
     android:orientation="vertical"
     tools:context=".DetailActivity">
 
-    <ImageView
-        android:id="@+id/imagen"
-        android:layout_width="wrap_content"
-        android:layout_height="200dp"
-        android:layout_gravity="center"
-        android:scaleType="centerCrop"
-        tools:srcCompat="@tools:sample/avatars" />
-
-    <TextView
-        android:id="@+id/descripcionCorta"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="Descripcion corta" />
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="true"
-        android:padding="16dp">
+        android:padding="8dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/imagen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="200dp"
+                    android:scaleType="centerCrop"
+                    tools:srcCompat="@tools:sample/avatars" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/descripcionCorta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="10dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                tools:text="Descripcion corta" />
+
+            <View
+                android:id="@+id/divider5"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
+
             <TextView
                 android:id="@+id/descripcion"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="@tools:sample/lorem/random" />
+                android:text="Descripcion corta"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+            <View
+                android:id="@+id/divider6"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="true">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textoGaleria"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Galeria"
+                        android:textColor="@color/black"
+                        android:textSize="22sp" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerGaleria"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        tools:ignore="SpeakableTextPresentCheck"
+                        tools:listitem="@layout/view_galeria_imagenes" />
+                </LinearLayout>
+            </HorizontalScrollView>
+
         </LinearLayout>
     </ScrollView>
 

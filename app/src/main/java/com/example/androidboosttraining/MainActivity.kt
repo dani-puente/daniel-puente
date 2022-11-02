@@ -3,7 +3,9 @@ package com.example.androidboosttraining
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.ActionBar
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.androidboosttraining.databinding.ActivityMainBinding
 import com.example.androidboosttraining.consulta_api.Ficha
 import com.example.androidboosttraining.consulta_api.FichaDBClient
@@ -14,12 +16,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        title = "León"
         val fichasAdapter = FichasAdapter(
             emptyList()
         ) {
             navigateTo(it)
         }
-
+        val manager = GridLayoutManager(this, 1)
+        binding.recycler.layoutManager = manager
         binding.recycler.adapter = fichasAdapter
 
         lifecycleScope.launch {
@@ -39,7 +43,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun navigateTo(ficha: Ficha) {
         val intent = Intent(this, DetailActivity::class.java)
-        intent.putExtra(DetailActivity.FICHA, ficha)
+        intent.putExtra("idFicha", ficha.idFicha)
+        intent.putExtra("tituloActBar", ficha.nombre)
         startActivity(intent)
     }
 }
