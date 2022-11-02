@@ -8,11 +8,11 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import com.example.androidboosttraining.databinding.ActivityDetailBinding
 import com.example.androidboosttraining.consulta_api_detalle.DetalleDBClient
+
 import kotlinx.coroutines.launch
 
 
 class DetailActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityDetailBinding.inflate(layoutInflater)
@@ -27,16 +27,13 @@ class DetailActivity : AppCompatActivity() {
         binding.recyclerGaleria.adapter = galeriaAdapter
 
         val extras = intent.extras
-        val idFicha = extras?.getInt("idFicha") ?: null
-        val tituloActBar = extras?.getString("tituloActBar") ?: null
-        var guardado = false
+        val idFicha = extras?.getInt("idFicha")
+        val tituloActBar = extras?.getString("tituloActBar")
         binding.fab.setOnClickListener {
-            if (guardado == true) {
+            if () {
                 binding.fab.setImageResource(R.drawable.ic_fav_vacio)
-                guardado = false
             } else {
                 binding.fab.setImageResource(R.drawable.ic_fav_lleno)
-                guardado = true
             }
         }
         if (tituloActBar != null) {
