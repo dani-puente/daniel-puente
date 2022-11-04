@@ -24,26 +24,32 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         title = "León"
         setSupportActionBar(binding.toolbar)
+        //configuracion ActionBar
         val actionBar: ActionBar? = supportActionBar
         if (actionBar != null) {
             actionBar.setHomeAsUpIndicator(R.drawable.ic_menu)
             actionBar.setDisplayHomeAsUpEnabled(true)
         }
+        //Creamos adaptador
         val fichasAdapter = FichasAdapter(
             emptyList()
         ) {
             navigateTo(it)
         }
+        //Definimos el layout que inflara el manager y el adapter que utilizara
         val manager = GridLayoutManager(this, 1)
         binding.recycler.layoutManager = manager
         binding.recycler.adapter = fichasAdapter
+        //Creamos la base de datos si no existe
         val dBHelper = DBHelper(this)
         val db: SQLiteDatabase = dBHelper.writableDatabase
         db.close()
+        //Se establece el comportamiento del boton en este caso del NavigationView, que mandara a la pantalla de favoritos
         binding.navView.setNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.fav -> {
-                    Log.i("fav", "Se ha pulsado fav")
+                    val intent = Intent(this, Favoritos::class.java)
+                    startActivity(intent)
                 }
             }
             false
@@ -77,6 +83,8 @@ class MainActivity : AppCompatActivity() {
     private fun navigateTo(ficha: Ficha) {
         val intent = Intent(this, DetailActivity::class.java)
         intent.putExtra("idFicha", ficha.idFicha)
+        intent.putExtra("urlImagen", ficha.urlImagen)
+        intent.putExtra("nombre", ficha.nombre)
         intent.putExtra("tituloActBar", ficha.nombre)
         startActivity(intent)
     }
