@@ -5,7 +5,9 @@ import android.database.sqlite.SQLiteDatabase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import androidx.appcompat.app.ActionBar
+import androidx.core.view.GravityCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.androidboosttraining.BD.DBHelper
@@ -15,12 +17,18 @@ import com.example.androidboosttraining.consulta_api.FichaDBClient
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
-    val binding = ActivityMainBinding.inflate(layoutInflater)
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        val binding = ActivityMainBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        toolbar("León")
+        title = "León"
+        setSupportActionBar(binding.toolbar)
+        val actionBar: ActionBar? = supportActionBar
+        if (actionBar != null) {
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_menu)
+            actionBar.setDisplayHomeAsUpEnabled(true)
+        }
         val fichasAdapter = FichasAdapter(
             emptyList()
         ) {
@@ -29,14 +37,18 @@ class MainActivity : AppCompatActivity() {
         val manager = GridLayoutManager(this, 1)
         binding.recycler.layoutManager = manager
         binding.recycler.adapter = fichasAdapter
-        var baseCreada = false
-        if (baseCreada == false) {
-            val dBHelper = DBHelper(this)
-            val db: SQLiteDatabase = dBHelper.writableDatabase
-            db.close()
+        val dBHelper = DBHelper(this)
+        val db: SQLiteDatabase = dBHelper.writableDatabase
+        db.close()
+        onOptionsItemSelected()
+        binding.navView.setNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.fav -> {
+                    Log.i("fav", "Se ha pulsado fav")
+                }
+            }
+            false
         }
-        mostrarItemMenu()
-
         lifecycleScope.launch {
             val idCategoriaPadre = getString(R.string.idCategoriaPadre)
             val idIdioma = getString(R.string.idIdioma)
@@ -50,25 +62,24 @@ class MainActivity : AppCompatActivity() {
             fichasAdapter.notifyDataSetChanged()
 
         }
-    }
-    private fun mostrarItemMenu(){
-        binding.navView.setNavigationItemSelectedListener {
-            when (it.itemId) {
-                R.id.fav -> {
-                    Log.i("fav", "Se ha pulsado fav")
+        fun onOptionsItemSelected(item: MenuItem): Boolean {
+            when (item.itemId) {
+                android.R.id.home -> {
+                    binding.drawerLayout.openDrawer(GravityCompat.START)
                 }
             }
-            false
+            return super.onOptionsItemSelected(item)
         }
+
     }
 
-    private fun toolbar(titulo: String){
-        setSupportActionBar(binding.toolbar)
-        val actionBar: ActionBar? = supportActionBar
-        if (actionBar != null){
-            actionBar.setHomeAsUpIndicator(R.drawable.ic_menu)
-            title = titulo
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                binding.drawerLayout.openDrawer(GravityCompat.START)
+            }
         }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun navigateTo(ficha: Ficha) {
@@ -77,4 +88,6 @@ class MainActivity : AppCompatActivity() {
         intent.putExtra("tituloActBar", ficha.nombre)
         startActivity(intent)
     }
+
+
 }

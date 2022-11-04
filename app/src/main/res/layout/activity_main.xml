@@ -14,21 +14,12 @@
         android:orientation="vertical">
 
         <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:id="@+id/toolbar"
             android:background="@color/design_default_color_primary"
-            android:theme="@style/ThemeOverlay.AppCompat.Light"
-            ></androidx.appcompat.widget.Toolbar>
+            android:theme="@style/ThemeOverlay.AppCompat.Light"></androidx.appcompat.widget.Toolbar>
 
-        <com.google.android.material.navigation.NavigationView
-            android:id="@+id/navView"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            app:menu="@menu/menu">
-
-        </com.google.android.material.navigation.NavigationView>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler"
@@ -39,5 +30,12 @@
             tools:listitem="@layout/view_ficha_item" />
 
     </LinearLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:menu="@menu/menu"></com.google.android.material.navigation.NavigationView>
 
 </androidx.drawerlayout.widget.DrawerLayout>
