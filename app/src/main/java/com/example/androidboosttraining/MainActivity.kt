@@ -40,7 +40,6 @@ class MainActivity : AppCompatActivity() {
         val dBHelper = DBHelper(this)
         val db: SQLiteDatabase = dBHelper.writableDatabase
         db.close()
-        onOptionsItemSelected()
         binding.navView.setNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.fav -> {
@@ -49,6 +48,7 @@ class MainActivity : AppCompatActivity() {
             }
             false
         }
+
         lifecycleScope.launch {
             val idCategoriaPadre = getString(R.string.idCategoriaPadre)
             val idIdioma = getString(R.string.idIdioma)
@@ -62,21 +62,13 @@ class MainActivity : AppCompatActivity() {
             fichasAdapter.notifyDataSetChanged()
 
         }
-        fun onOptionsItemSelected(item: MenuItem): Boolean {
-            when (item.itemId) {
-                android.R.id.home -> {
-                    binding.drawerLayout.openDrawer(GravityCompat.START)
-                }
-            }
-            return super.onOptionsItemSelected(item)
-        }
 
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
-                binding.drawerLayout.openDrawer(GravityCompat.START)
+                //binding.drawerLayout.openDrawer(GravityCompat.START)
             }
         }
         return super.onOptionsItemSelected(item)
