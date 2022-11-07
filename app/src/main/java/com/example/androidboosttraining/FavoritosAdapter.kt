@@ -4,23 +4,21 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.androidboosttraining.consulta_api.Ficha
 import com.example.androidboosttraining.databinding.ViewFavoritosItemBinding
-import com.example.androidboosttraining.databinding.ViewFichaItemBinding
 
 class FavoritosAdapter(
-    var ficha: List<Ficha>,
-    private val fichaClickedListener: (ficha: Ficha) -> Unit
+    var ficha: MutableList<FichaFav>,
+    private val fichaClickedListener: (ficha: FichaFav) -> Unit
 ) :
     RecyclerView.Adapter<FavoritosAdapter.ViewHolder>() {
     class ViewHolder(private val binding: ViewFavoritosItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(ficha: Ficha) {
-            binding.tituloFav.text = ficha.nombre
+        fun bind(ficha: FichaFav) {
             Glide
                 .with(binding.root.context)
                 .load(ficha.urlImagen)
                 .into(binding.imagenFav)
+            binding.tituloFav.text = ficha.nombre
         }
 
     }

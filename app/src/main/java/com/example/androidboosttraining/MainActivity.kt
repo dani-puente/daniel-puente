@@ -4,7 +4,6 @@ import android.content.Intent
 import android.database.sqlite.SQLiteDatabase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBar
 import androidx.core.view.GravityCompat
@@ -17,10 +16,10 @@ import com.example.androidboosttraining.consulta_api.FichaDBClient
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
-
+    lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
-        val binding = ActivityMainBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         title = "León"
         setSupportActionBar(binding.toolbar)
@@ -74,7 +73,7 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
-                //binding.drawerLayout.openDrawer(GravityCompat.START)
+                binding.drawerLayout.openDrawer(GravityCompat.START)
             }
         }
         return super.onOptionsItemSelected(item)
