@@ -8,5 +8,5 @@ object FichaDBClient {
         Retrofit.Builder().baseUrl("https://tuciudaddecerca-api.proconsi.com")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-    val service = retrofit.create(FichaDBService::class.java)
+    val service: FichaDBService = retrofit.create(FichaDBService::class.java)
 }

@@ -22,6 +22,8 @@ class DetailActivity : AppCompatActivity() {
         val binding = ActivityDetailBinding.inflate(layoutInflater)
         val extras = intent.extras
         val idFicha = extras?.getInt("idFicha")
+        val urlImagen = extras?.getString("urlImagen") ?: println(Log.e("Error", "Valor nulo"))
+        val nombre = extras?.getString("nombre")?: println(Log.e("Error", "Valor nulo"))
         val dbHelper = DBHelper(this)
         val db = dbHelper.writableDatabase
         val estaEnFavoritos =
@@ -69,6 +71,8 @@ class DetailActivity : AppCompatActivity() {
                 val registro = ContentValues()
                 registro.put("id", "$idFicha")
                 registro.put("esFav", 1)
+                registro.put("urlImagen", "$urlImagen")
+                registro.put("nombre", "$nombre")
                 db.insert("favorito", null, registro)
             }
             db.close()

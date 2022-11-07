@@ -10,7 +10,7 @@ import com.example.androidboosttraining.consulta_api.Ficha
 
 class FichasAdapter(
     var ficha: List<Ficha>,
-    private val movieClickedListener: (ficha: Ficha) -> Unit
+    private val fichaClickedListener: (ficha: Ficha) -> Unit
 ) :
     RecyclerView.Adapter<FichasAdapter.ViewHolder>() {
 
@@ -52,7 +52,7 @@ class FichasAdapter(
         val ficha = ficha[position]
         holder.bind(ficha)
         holder.itemView.setOnClickListener {
-            movieClickedListener(ficha)
+            fichaClickedListener(ficha)
         }
     }
 

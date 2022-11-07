@@ -10,7 +10,9 @@ class DBHelper(
 ) : SQLiteOpenHelper(context,"favoritos.db", null, 1) {
     override fun onCreate(p0: SQLiteDatabase?) {
         p0?.execSQL("CREATE TABLE favorito(id INT PRIMARY KEY, " +
-                "esFav BIT NOT NULL)")
+                "esFav BIT NOT NULL," +
+                "nombre VARCHAR," +
+                "urlImagen VARCHAR)")
     }
 
     override fun onUpgrade(p0: SQLiteDatabase?, p1: Int, p2: Int) {
