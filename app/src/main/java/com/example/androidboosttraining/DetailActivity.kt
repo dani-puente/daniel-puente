@@ -4,6 +4,8 @@ import android.content.ContentValues
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.ProgressBar
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
@@ -15,11 +17,11 @@ import kotlinx.coroutines.launch
 
 
 class DetailActivity : AppCompatActivity() {
-
-
+    lateinit var binding: ActivityDetailBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = ActivityDetailBinding.inflate(layoutInflater)
+        binding = ActivityDetailBinding.inflate(layoutInflater)
+        binding.progressBar.visibility = View.VISIBLE
         val extras = intent.extras
         val idFicha = extras?.getInt("idFicha")
         val urlImagen = extras?.getString("urlImagen") ?: println(Log.e("Error", "Valor nulo"))
@@ -103,8 +105,7 @@ class DetailActivity : AppCompatActivity() {
         } else {
             Log.d("DetailActivity", "Estoy dando error")
         }
+        binding.progressBar.visibility = View.GONE
     }
-
-
 }
 
