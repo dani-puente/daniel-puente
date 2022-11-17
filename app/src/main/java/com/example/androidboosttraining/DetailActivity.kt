@@ -21,7 +21,7 @@ class DetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
-        binding.progressBar.visibility = View.VISIBLE
+        //binding.progressBar.visibility = View.VISIBLE
         val extras = intent.extras
         val idFicha = extras?.getInt("idFicha")
         val urlImagen = extras?.getString("urlImagen") ?: println(Log.e("Error", "Valor nulo"))
@@ -105,7 +105,7 @@ class DetailActivity : AppCompatActivity() {
         } else {
             Log.d("DetailActivity", "Estoy dando error")
         }
-        binding.progressBar.visibility = View.GONE
+        //binding.progressBar.visibility = View.GONE
     }
 }
 
