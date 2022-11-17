@@ -1,4 +1,4 @@
-package com.example.jcvacio
+package com.example.aplicacionciudades
 
 import org.junit.Test
 
