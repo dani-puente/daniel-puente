@@ -1,4 +1,4 @@
-package com.example.androidboosttraining
+package com.example.jcvacio
 
 import org.junit.Test
 
