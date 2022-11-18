@@ -6,7 +6,7 @@ import retrofit2.http.Query
 
 interface FichasRepo {
     @GET
-    fun listFichas(
+    suspend fun listFichas(
         @Query("idCategoriaPadre") idCategoria: Int,
         @Query("idIdioma") idIdioma: Int,
         @Query("idProyecto") idProyecto: Int
