@@ -1,4 +1,4 @@
-package com.example.aplicacionciudades.mainScreen.drawer
+package com.example.aplicacionciudades.view.mainScreen.drawer
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.material.Text

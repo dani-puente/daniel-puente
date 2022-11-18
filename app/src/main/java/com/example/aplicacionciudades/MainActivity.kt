@@ -3,7 +3,6 @@ package com.example.aplicacionciudades
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
@@ -12,12 +11,12 @@ import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.aplicacionciudades.mainScreen.MakeToolbar
-import com.example.aplicacionciudades.mainScreen.cardsLugares.MakeItemPlaceList
-import com.example.aplicacionciudades.mainScreen.drawer.MakeDrawerView
+import com.example.aplicacionciudades.R
 import com.example.aplicacionciudades.ui.theme.AplicacionCiudadesTheme
+import com.example.aplicacionciudades.view.mainScreen.cardsLugares.MakeItemPlaceList
+import com.example.aplicacionciudades.view.mainScreen.drawer.MakeDrawerView
+import com.example.aplicacionciudades.view.mainScreen.toolbar.MakeToolbar
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {

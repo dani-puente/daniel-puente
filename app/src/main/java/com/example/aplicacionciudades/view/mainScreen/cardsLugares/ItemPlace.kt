@@ -1,4 +1,4 @@
-package com.example.aplicacionciudades.mainScreen.cardsLugares
+package com.example.aplicacionciudades.view.mainScreen.cardsLugares
 
 import android.util.Log
 import androidx.compose.foundation.clickable
@@ -15,9 +15,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.example.aplicacionciudades.model.consultaApi.FichaX
 
 @Composable
-fun ItemPlace(){
+fun ItemPlace(lugar: FichaX){
     Card(
         modifier = Modifier
             .clickable { Log.i("Info", "Clicked!!") }
@@ -28,13 +29,13 @@ fun ItemPlace(){
         ) {
         Column {
             AsyncImage(
-                model = "http://www.leondecerca.com/imagenes/imagenes/2522607.jpg",
+                model = lugar.urlImagen,
                 modifier = Modifier.fillMaxSize(),
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
             )
             Text(
-                text = "Catedral de León",
+                text = lugar.nombre,
                 fontSize = 25.sp,
                 fontStyle = FontStyle.Italic,
                 modifier = Modifier.fillMaxSize().padding(top = 5.dp, bottom = 5.dp),

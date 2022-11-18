@@ -1,4 +1,4 @@
-package com.example.aplicacionciudades.mainScreen.drawer
+package com.example.aplicacionciudades.view.mainScreen.drawer
 
 import android.util.Log
 import androidx.compose.foundation.clickable
