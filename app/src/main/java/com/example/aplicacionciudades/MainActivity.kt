@@ -12,15 +12,22 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.aplicacionciudades.R
+import com.example.aplicacionciudades.model.consultaApi.FichaX
 import com.example.aplicacionciudades.ui.theme.AplicacionCiudadesTheme
 import com.example.aplicacionciudades.view.mainScreen.cardsLugares.MakeItemPlaceList
 import com.example.aplicacionciudades.view.mainScreen.drawer.MakeDrawerView
 import com.example.aplicacionciudades.view.mainScreen.toolbar.MakeToolbar
-import kotlinx.coroutines.launch
+import com.example.aplicacionciudades.viewmodel.MAViewModel
+import kotlinx.coroutines.*
+import kotlin.coroutines.CoroutineContext
 
-class MainActivity : ComponentActivity() {
+class MainActivity : ComponentActivity(), CoroutineScope {
+    private lateinit var job: Job
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + job
 
+    private var viewModel: MAViewModel = MAViewModel()
+    private var fichas: List<FichaX> = emptyList()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -44,13 +51,31 @@ class MainActivity : ComponentActivity() {
                             MakeDrawerView(icono = icono)
                         }
                     ) {
-                        MakeItemPlaceList()
+                        MakeItemPlaceList(fichas)
                     }
                 }
             }
         }
     }
+
+    override fun onStart() {
+        super.onStart()
+        job = SupervisorJob()
+        launch {
+            viewModel
+                .fichas
+                .collect {
+                    fichas = it
+                }
+        }
+    }
+
+    override fun onStop() {
+        job.cancel()
+        super.onStop()
+    }
 }
+
 
 @Preview(
 
@@ -77,7 +102,7 @@ fun DefaultPreview() {
                     MakeDrawerView(icono = icono)
                 }
             ) {
-                MakeItemPlaceList()
+                // MakeItemPlaceList()
             }
         }
     }

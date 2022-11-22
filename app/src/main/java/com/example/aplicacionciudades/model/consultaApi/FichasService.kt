@@ -1,13 +1,19 @@
 package com.example.aplicacionciudades.model.consultaApi
 
+import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import kotlinx.serialization.json.Json
+import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+//Json.asConverterFactory("application/json".toMediaType())
 object FichasService {
-    private val retrofit =
+    val retrofit by lazy {
         Retrofit.Builder()
-            .baseUrl("https://tuciudaddecerca-api.proconsi.com")
             .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl("https://tuciudaddecerca-api.proconsi.com/")
             .build()
-    val service: FichasRepo = retrofit.create(FichasRepo::class.java)
+            .create(FichasRepo::class.java)
+    }
+
 }
