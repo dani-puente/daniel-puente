@@ -4,10 +4,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.aplicacionciudades.R
 import com.example.aplicacionciudades.model.consultaApi.FichaX
-import com.example.aplicacionciudades.model.consultaApi.FichasService
+import com.example.aplicacionciudades.model.consultaApi.RetrofitRepository
+import com.example.aplicacionciudades.model.consultaApi.fichasRepo
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 
 class MAViewModel : ViewModel() {
@@ -24,12 +24,12 @@ class MAViewModel : ViewModel() {
     }
     private fun emitirFichas() {
         viewModelScope.launch {
-            val fichasService = FichasService.retrofit.listFichas(
+            val fichasService = fichasRepo.listFichas(
                 R.integer.idCategoriaPadre,
                 R.integer.idIdioma,
                 R.integer.idProyecto
             )
-            _fichas.value = fichasService
+            _fichas.value = fichasService.fichas
             println(fichasService.fichas)
         }
 
