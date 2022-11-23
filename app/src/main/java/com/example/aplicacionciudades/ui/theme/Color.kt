@@ -1,4 +1,4 @@
-package com.example.jcvacio.ui.theme
+package com.example.aplicacionciudades.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
