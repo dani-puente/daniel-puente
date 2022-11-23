@@ -1,6 +1,8 @@
 package com.example.aplicacionciudades.view.mainScreen
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
@@ -34,9 +36,12 @@ fun MainScreen(fichas: List<FichaX>) {
             },
             drawerContent = {
                 MakeDrawerView(icono = icono)
+            },
+            content = { padding ->
+                Column(modifier = Modifier.padding(padding)) {
+                    MakeItemPlaceList(listaLugares = fichas)
+                }
             }
-        ) {
-            MakeItemPlaceList(fichas)
-        }
+        )
     }
 }
