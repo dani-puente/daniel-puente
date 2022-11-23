@@ -8,11 +8,7 @@ import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import com.example.aplicacionciudades.R
-import com.example.aplicacionciudades.model.consultaApi.Ficha
 import com.example.aplicacionciudades.model.consultaApi.FichaX
 import com.example.aplicacionciudades.view.mainScreen.cardsLugares.MakeItemPlaceList
 import com.example.aplicacionciudades.view.mainScreen.drawer.MakeDrawerView

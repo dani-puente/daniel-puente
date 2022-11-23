@@ -17,21 +17,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.aplicacionciudades.model.consultaApi.FichaX
 import com.example.aplicacionciudades.ui.theme.AplicacionCiudadesTheme
 import com.example.aplicacionciudades.view.SplashScreen
 import com.example.aplicacionciudades.view.mainScreen.MainScreen
-import com.example.aplicacionciudades.view.mainScreen.cardsLugares.MakeItemPlaceList
 import com.example.aplicacionciudades.view.mainScreen.drawer.MakeDrawerView
 import com.example.aplicacionciudades.view.mainScreen.toolbar.MakeToolbar
 import com.example.aplicacionciudades.viewmodel.MAViewModel
-import kotlinx.coroutines.*
-import kotlin.coroutines.CoroutineContext
+import kotlinx.coroutines.launch
+import androidx.compose.runtime.getValue
 
-class MainActivity : ComponentActivity(), CoroutineScope {
-    private lateinit var job: Job
-    override val coroutineContext: CoroutineContext
-        get() = Dispatchers.Main + job
+class MainActivity : ComponentActivity(){
 
     private var viewModel: MAViewModel = MAViewModel()
     //var fichas by remember { viewModel.fichas.collectAsState() }
@@ -44,14 +39,15 @@ class MainActivity : ComponentActivity(), CoroutineScope {
                 val navController = rememberNavController()
                 NavHost(navController = navController, startDestination = "splash") {
                     composable("splash") {
-                        SplashScreen()
+                        SplashScreen(navController)
                     }
                     composable("main") {
                         val fichasState = viewModel.fichas.collectAsState()
-                        val fichas = remember {
+                        val listaFichas by remember {
                             fichasState
                         }
-                        MainScreen(fichas)
+
+                        MainScreen(listaFichas)
                     }
                 }
             }
