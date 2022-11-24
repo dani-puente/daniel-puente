@@ -9,7 +9,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.aplicacionciudades.R
@@ -33,7 +32,7 @@ fun Splash() {
         contentAlignment = Alignment.Center
     ) {
         Image(
-            painter = painterResource(id = R.mipmap.iconoleon_foreground),
+            painter = painterResource(id = R.drawable.androidcarga),
             contentDescription = "Bandera de León",
             modifier = Modifier.size(150.dp, 150.dp)
         )

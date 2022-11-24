@@ -1,6 +1,5 @@
 package com.example.aplicacionciudades.view.mainScreen.cardsLugares
 
-import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,15 +13,15 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import coil.compose.AsyncImage
-import com.example.aplicacionciudades.model.consultaApi.Ficha
-import com.example.aplicacionciudades.model.consultaApi.FichaX
+import com.example.aplicacionciudades.model.consultaapimain.FichaX
 
 @Composable
-fun ItemPlace(lugar: FichaX){
+fun ItemPlace(lugar: FichaX, navController: NavController) {
     Card(
         modifier = Modifier
-            .clickable { Log.i("Info", "Clicked!!") }
+            .clickable{navController.navigate("detail")}
             .fillMaxSize()
             .padding(3.dp),
         elevation = 10.dp,

@@ -1,6 +1,6 @@
 package com.example.aplicacionciudades.viewmodel
 
-object Resources {
+object ResourcesObject {
     val idCategoriaPadre = 30
     val idIdioma = 0
     val idProyecto = 1

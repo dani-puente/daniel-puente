@@ -1,10 +1,10 @@
-package com.example.aplicacionciudades.model.consultaApi
+package com.example.aplicacionciudades.model.consultaapimain
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 //Json.asConverterFactory("application/json".toMediaType())
-object RetrofitRepository {
+object RetroRepoFicha {
     val retrofit by lazy {
         Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
@@ -12,4 +12,4 @@ object RetrofitRepository {
             .build()
     }
 }
-val fichasRepo = RetrofitRepository.retrofit.create(FichasRepo::class.java)
+val fichasRepo = RetroRepoFicha.retrofit.create(FichasRepo::class.java)

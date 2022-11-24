@@ -7,18 +7,18 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.aplicacionciudades.model.consultaApi.Ficha
-import com.example.aplicacionciudades.model.consultaApi.FichaX
+import androidx.navigation.NavController
+import com.example.aplicacionciudades.model.consultaapimain.FichaX
 
 @Composable
-fun MakeItemPlaceList(listaLugares: List<FichaX>){
+fun MakeItemPlaceList(listaLugares: List<FichaX>, navController: NavController){
     LazyColumn(
         modifier = Modifier.padding(10.dp),
 
 
     ){
         items(listaLugares.size){
-            ItemPlace(listaLugares[it])
+            ItemPlace(listaLugares[it],navController)
             Spacer(modifier = Modifier.height(10.dp))
         }
     }

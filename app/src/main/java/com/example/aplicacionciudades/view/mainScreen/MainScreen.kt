@@ -10,18 +10,20 @@ import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavController
 import com.example.aplicacionciudades.R
-import com.example.aplicacionciudades.model.consultaApi.FichaX
+import com.example.aplicacionciudades.model.consultaapimain.FichaX
 import com.example.aplicacionciudades.view.mainScreen.cardsLugares.MakeItemPlaceList
 import com.example.aplicacionciudades.view.mainScreen.drawer.MakeDrawerView
-import com.example.aplicacionciudades.view.mainScreen.toolbar.MakeToolbar
+import com.example.aplicacionciudades.view.mainScreen.toolbar.MakeToolbarMain
 import kotlinx.coroutines.launch
 
 @Composable
-fun MainScreen(fichas: List<FichaX>) {
+fun MainScreen(fichas: List<FichaX>, navController: NavController) {
     // A surface container using the 'background' color from the theme
     Surface(
-        modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.background
+        modifier = Modifier.fillMaxSize(),
+        color = MaterialTheme.colors.background
     ) {
         val scaffoldState = rememberScaffoldState()
         val scope = rememberCoroutineScope()
@@ -30,7 +32,7 @@ fun MainScreen(fichas: List<FichaX>) {
         Scaffold(
             scaffoldState = scaffoldState,
             topBar = {
-                MakeToolbar {
+                MakeToolbarMain {
                     scope.launch { scaffoldState.drawerState.open() }
                 }
             },
@@ -39,7 +41,7 @@ fun MainScreen(fichas: List<FichaX>) {
             },
             content = { padding ->
                 Column(modifier = Modifier.padding(padding)) {
-                    MakeItemPlaceList(listaLugares = fichas)
+                    MakeItemPlaceList(listaLugares = fichas, navController)
                 }
             }
         )

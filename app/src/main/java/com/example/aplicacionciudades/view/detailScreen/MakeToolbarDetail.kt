@@ -1,23 +1,22 @@
-package com.example.aplicacionciudades.view.mainScreen.toolbar
+package com.example.aplicacionciudades.view.detailScreen
 
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavController
 
 @Composable
-fun MakeToolbarMain(
-    onNavigationIconClick: () -> Unit,
-) {
+fun MakeToolbarDetail(navConttroller: NavController, nombre: String?) {
     TopAppBar(
-        title = { Text("León") },
+        title = { nombre?.let { Text(it) } },
         navigationIcon = {
-            IconButton(onClick = onNavigationIconClick) {
+            IconButton(onClick = { navConttroller.popBackStack() }) {
                 Icon(
-                    imageVector = Icons.Default.Menu,
+                    imageVector = Icons.Default.ArrowBack,
                     contentDescription = null
                 )
             }
