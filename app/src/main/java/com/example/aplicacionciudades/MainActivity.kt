@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -13,13 +12,15 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.aplicacionciudades.ui.theme.AplicacionCiudadesTheme
 import com.example.aplicacionciudades.view.SplashScreen
-import com.example.aplicacionciudades.view.detailScreen.DetailScreen
 import com.example.aplicacionciudades.view.mainScreen.MainScreen
 import com.example.aplicacionciudades.viewmodel.MainActivityViewModel
+import androidx.compose.runtime.getValue
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.aplicacionciudades.view.detailScreen.DetailScreen
 
 class MainActivity : ComponentActivity() {
 
-    private var viewModel: MainActivityViewModel = MainActivityViewModel()
+    private var mainActivityViewModel: MainActivityViewModel = MainActivityViewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -30,18 +31,21 @@ class MainActivity : ComponentActivity() {
                         SplashScreen(navController)
                     }
                     composable("main") {
-                        val fichasState = viewModel.fichas.collectAsState()
+                        val fichasState = mainActivityViewModel.fichas.collectAsState()
                         val listaFichas by remember {
                             fichasState
                         }
                         MainScreen(listaFichas, navController)
                     }
-                    composable("detail" + "/{idFicha}",
+                    composable(
+                        "detail/{idFicha}",
                         arguments = listOf(navArgument(name = "idFicha") {
                             type = NavType.IntType
                         })
                     ) {
-                        //DetailScreen()
+                        DetailScreen(
+                            navController = navController, vm = viewModel()
+                        )
                     }
                 }
             }

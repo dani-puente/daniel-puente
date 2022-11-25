@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import com.example.aplicacionciudades.R
 import com.example.aplicacionciudades.model.consultaapimain.FichaX
+import com.example.aplicacionciudades.view.detailScreen.getDetailScreenRoute
 import com.example.aplicacionciudades.view.mainScreen.cardsLugares.MakeItemPlaceList
 import com.example.aplicacionciudades.view.mainScreen.drawer.MakeDrawerView
 import com.example.aplicacionciudades.view.mainScreen.toolbar.MakeToolbarMain
@@ -41,7 +42,9 @@ fun MainScreen(fichas: List<FichaX>, navController: NavController) {
             },
             content = { padding ->
                 Column(modifier = Modifier.padding(padding)) {
-                    MakeItemPlaceList(listaLugares = fichas, navController)
+                    MakeItemPlaceList(listaLugares = fichas, navController){
+                        navController.navigate(getDetailScreenRoute(it.idFicha))
+                    }
                 }
             }
         )

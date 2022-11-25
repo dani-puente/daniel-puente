@@ -18,10 +18,10 @@ import coil.compose.AsyncImage
 import com.example.aplicacionciudades.model.consultaapimain.FichaX
 
 @Composable
-fun ItemPlace(lugar: FichaX, navController: NavController) {
+fun ItemPlace(lugar: FichaX, navController: NavController, modifier: Modifier = Modifier) {
     Card(
         modifier = Modifier
-            .clickable{navController.navigate("detail")}
+            .then(modifier)
             .fillMaxSize()
             .padding(3.dp),
         elevation = 10.dp,
@@ -38,7 +38,9 @@ fun ItemPlace(lugar: FichaX, navController: NavController) {
                 text = lugar.nombre,
                 fontSize = 25.sp,
                 fontStyle = FontStyle.Italic,
-                modifier = Modifier.fillMaxSize().padding(top = 5.dp, bottom = 5.dp),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(top = 5.dp, bottom = 5.dp),
                 textAlign = TextAlign.Center,
             )
         }

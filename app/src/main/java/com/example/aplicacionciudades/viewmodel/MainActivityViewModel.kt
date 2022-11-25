@@ -11,13 +11,11 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class MainActivityViewModel : ViewModel() {
-//    private val _idFicha = MutableStateFlow<Int?>(null)
-//    private val idFicha: StateFlow<Int?> get() = _idFicha
 
     private val _fichas = MutableStateFlow<List<FichaX>>(emptyList())
     val fichas: StateFlow<List<FichaX>> get() = _fichas
 
-    init {
+    fun init() {
         listarFichas()
     }
 
@@ -31,14 +29,6 @@ class MainActivityViewModel : ViewModel() {
             _fichas.value = fichasService.fichas
         }
     }
-//    private fun getDetalle(){
-//        viewModelScope.launch {
-//
-//            val detalle = detailRepo.detail(
-//            )
-//        }
-//    }
-
 }
 
 

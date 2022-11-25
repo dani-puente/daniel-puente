@@ -1,6 +1,8 @@
 package com.example.aplicacionciudades.view.mainScreen.cardsLugares
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -11,15 +13,15 @@ import androidx.navigation.NavController
 import com.example.aplicacionciudades.model.consultaapimain.FichaX
 
 @Composable
-fun MakeItemPlaceList(listaLugares: List<FichaX>, navController: NavController){
+fun MakeItemPlaceList(listaLugares: List<FichaX>, navController: NavController, onClick: (item:FichaX)-> Unit){
     LazyColumn(
-        modifier = Modifier.padding(10.dp),
-
-
+        modifier = Modifier.fillMaxSize().
+        padding(10.dp)
     ){
         items(listaLugares.size){
-            ItemPlace(listaLugares[it],navController)
-            Spacer(modifier = Modifier.height(10.dp))
+            val item = listaLugares[it]
+            ItemPlace(item,navController, modifier = Modifier.clickable { onClick(item)})
+            Spacer(modifier = Modifier.height(25.dp))
         }
     }
 }
