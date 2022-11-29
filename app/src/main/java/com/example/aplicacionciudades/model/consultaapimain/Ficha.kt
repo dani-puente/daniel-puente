@@ -1,4 +1,4 @@
-package com.example.aplicacionciudades.model.consultaApi
+package com.example.aplicacionciudades.model.consultaapimain
 
 import kotlinx.serialization.Serializable
 

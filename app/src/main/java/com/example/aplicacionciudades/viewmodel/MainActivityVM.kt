@@ -1,29 +1,28 @@
 package com.example.aplicacionciudades.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.aplicacionciudades.model.consultaApi.FichaX
-import com.example.aplicacionciudades.model.consultaApi.fichasRepo
+import com.example.aplicacionciudades.model.consultaapimain.FichaX
+import com.example.aplicacionciudades.model.consultaapimain.fichasRepo
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class MAViewModel : ViewModel() {
+class MainActivityVM : ViewModel() {
+
     private val _fichas = MutableStateFlow<List<FichaX>>(emptyList())
-    val fichas: StateFlow<List<FichaX>> get() = _fichas
+    val fichas = _fichas.asStateFlow()
 
     init {
         listarFichas()
-        Log.i("Info", "$_fichas")
     }
 
     private fun listarFichas() {
         viewModelScope.launch {
             val fichasService = fichasRepo.listFichas(
-                Resources.idCategoriaPadre,
-                Resources.idIdioma,
-                Resources.idProyecto
+                ResourcesObject.idCategoriaPadre,
+                ResourcesObject.idIdioma,
+                ResourcesObject.idProyecto
             )
             _fichas.value = fichasService.fichas
         }

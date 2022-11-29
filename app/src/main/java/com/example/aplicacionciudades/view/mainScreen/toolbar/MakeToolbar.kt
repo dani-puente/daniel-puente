@@ -9,7 +9,7 @@ import androidx.compose.material.icons.filled.Menu
 import androidx.compose.runtime.Composable
 
 @Composable
-fun MakeToolbar(
+fun MakeToolbarMain(
     onNavigationIconClick: () -> Unit,
 ) {
     TopAppBar(
