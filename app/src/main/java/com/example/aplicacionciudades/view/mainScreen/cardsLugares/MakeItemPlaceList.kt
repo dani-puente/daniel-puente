@@ -9,18 +9,18 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import com.example.aplicacionciudades.model.consultaapimain.FichaX
 
 @Composable
-fun MakeItemPlaceList(listaLugares: List<FichaX>, navController: NavController, onClick: (item:FichaX)-> Unit){
+fun MakeItemPlaceList(listaLugares: List<FichaX>, onClick: (item: FichaX) -> Unit) {//En la lambda se pasa un objeto de tipo FichaX y te devuelve un objeto Unit
     LazyColumn(
-        modifier = Modifier.fillMaxSize().
-        padding(10.dp)
-    ){
-        items(listaLugares.size){
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(10.dp)
+    ) {
+        items(listaLugares.size) {
             val item = listaLugares[it]
-            ItemPlace(item,navController, modifier = Modifier.clickable { onClick(item)})
+            ItemPlace(item, modifier = Modifier.clickable { onClick(item) })
             Spacer(modifier = Modifier.height(25.dp))
         }
     }

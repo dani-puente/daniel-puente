@@ -1,49 +1,101 @@
 package com.example.aplicacionciudades.view.detailScreen
 
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shadow
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.example.aplicacionciudades.model.consultaapidetail.Media
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun DetailItem(urlImagen: String?, nombre: String?, descCorta: String?, media: Media?) {
+fun DetailItem(urlImagen: String?, descCorta: String?, urlsImagen: List<String?>) {
     LazyColumn(modifier = Modifier.fillMaxSize()) {
         item {
             AsyncImage(
                 model = urlImagen,
                 contentDescription = "Imagen de detalle",
                 modifier = Modifier
-                    .fillMaxSize()
+                    .fillMaxWidth()
+                    .height(270.dp)
             )
-            nombre?.let {
+        }
+        stickyHeader {
+            Box(modifier = Modifier
+                .fillMaxSize()
+                // Con esto hacemos que el stickyHeader tenga fondo y no sea transparente
+               // .background(Color.White)
+            ) {
                 Text(
-                    text = it,
-                    modifier = Modifier
-                        .fillMaxSize(),
-                    textAlign = TextAlign.Start
-                )
-                Text(text = "Descripción corta")
-                descCorta?.let {textDesc ->
-                    Text(
-                        text = textDesc,
-                        modifier = Modifier
-                            .fillMaxSize()
+                    text = "Descripción corta",
+                    style = TextStyle(
+                        fontSize = 25.sp,
+                        shadow = Shadow(
+                            color = Color.Black,
+                            offset = Offset(10.0f, 10.0f),
+                            blurRadius = 10f
+                        )
                     )
-                }
-                Text(text = "Galeria")
-                LazyColumn(modifier = Modifier.fillMaxSize()) {
-                    media?.let{
-                        items(media.images.size){ numImagen ->
-                            AsyncImage(model = media.images[numImagen], contentDescription = "Imagen galeria")
-                        }
-                    }
-                }
+                )
             }
         }
+        item {
+            descCorta?.let { textDesc ->
+                Text(
+                    text = textDesc,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(15.dp),
+                    fontSize = 18.sp,
+                    textAlign = TextAlign.Justify
+                )
+            }
+        }
+        stickyHeader {
+            Box(modifier = Modifier
+                .fillMaxSize()
+                //.background(Color.White)
+            ) {
+                Text(
+                    text = "Galeria",
+                    style = TextStyle(
+                        fontSize = 25.sp,
+                        shadow = Shadow(
+                            color = Color.Black,
+                            offset = Offset(10.0f, 10.0f),
+                            blurRadius = 10f
+                        )
+                    )
+                )
+            }
+
+        }
+        items(urlsImagen.size) {
+            Imagen(urlImagen = urlsImagen[it])
+        }
     }
+}
+
+@Composable
+private fun Imagen(urlImagen: String?) {
+    AsyncImage(
+        model = urlImagen,
+        contentDescription = "Imagen galeria",
+        contentScale = ContentScale.Crop,
+        alignment = Alignment.Center,
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(15.dp)
+    )
 }
 

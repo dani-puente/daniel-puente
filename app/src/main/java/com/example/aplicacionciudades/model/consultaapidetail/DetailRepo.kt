@@ -7,7 +7,7 @@ interface DetailRepo {
     @GET("/ficha")
     suspend fun detail(
         @Query("idFicha") idFicha: Int,
-        @Query("TipoFicha") TipoFicha: Int,
+        @Query("TipoFicha") TipoFicha: String,
         @Query("idIdioma") idIdioma: Int,
         @Query("idProyecto") idProyecto: Int
     ): Detail

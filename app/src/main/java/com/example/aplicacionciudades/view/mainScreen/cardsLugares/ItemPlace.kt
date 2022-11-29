@@ -9,6 +9,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -18,10 +19,9 @@ import coil.compose.AsyncImage
 import com.example.aplicacionciudades.model.consultaapimain.FichaX
 
 @Composable
-fun ItemPlace(lugar: FichaX, navController: NavController, modifier: Modifier = Modifier) {
+fun ItemPlace(lugar: FichaX, modifier: Modifier = Modifier) {
     Card(
-        modifier = Modifier
-            .then(modifier)
+        modifier = modifier
             .fillMaxSize()
             .padding(3.dp),
         elevation = 10.dp,

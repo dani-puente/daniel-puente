@@ -4,17 +4,17 @@ import com.example.aplicacionciudades.model.consultaapimain.FichaX
 import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.contract
 
-//fun foo(state: State<List<FichaX>, Int>){
-//    when (state) {
-//        is State.Failure -> state.errors
-//        State.Idle -> state
-//        State.Loading -> state
-//        is State.Success -> state.data
-//    }
-//    if (state.hasErrors()){
-//        state.errors
-//    }
-//}
+fun foo(state: State<List<FichaX>, Int>){
+    when (state) {
+        is State.Failure -> state.errors
+        State.Idle -> state
+        State.Loading -> state
+        is State.Success -> state.data
+    }
+    if (state.hasErrors()){
+        state.errors
+    }
+}
 
 
 @OptIn(ExperimentalContracts::class)
