@@ -42,8 +42,8 @@ fun DetailItem(urlImagen: String?, descCorta: String?, urlsImagen: List<String?>
                         fontSize = 25.sp,
                         shadow = Shadow(
                             color = Color.Black,
-                            offset = Offset(10.0f, 10.0f),
-                            blurRadius = 10f
+                            offset = Offset(5.0f, 5.0f),
+                            blurRadius = 30f
                         )
                     )
                 )
