@@ -8,14 +8,15 @@ import com.example.aplicacionciudades.model.consultaapimain.FichaX
 import com.example.aplicacionciudades.model.consultaapimain.fichasRepo
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class MainActivityViewModel : ViewModel() {
 
     private val _fichas = MutableStateFlow<List<FichaX>>(emptyList())
-    val fichas: StateFlow<List<FichaX>> get() = _fichas
+    val fichas = _fichas.asStateFlow()
 
-    fun init() {
+    init {
         listarFichas()
     }
 
