@@ -1,9 +1,9 @@
 package com.example.aplicacionciudades.view.detailScreen
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.Scaffold
-import androidx.compose.material.rememberScaffoldState
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -24,7 +24,8 @@ fun getDetailScreenRoute(idFicha: Int, nombre: String): String {
 @Composable
 fun DetailScreen(
     navController: NavController,
-    vm: DetailScreenVM
+    vm: DetailScreenVM,
+    onClick: () -> Unit
 ) {
     val scaffoldState = rememberScaffoldState()
     val detailState = vm.detailState.collectAsState()
@@ -45,18 +46,29 @@ fun DetailScreen(
                 MyState.Success -> Succcess(padding, vm)
                 MyState.Failure -> TODO()
             }
-        }
+        },
+        floatingActionButton = {
+            FloatingActionButton(onClick = { onClick() }) {
+                Icon(
+                    imageVector = Icons.Default.FavoriteBorder,
+                    contentDescription = "Boton fav"
+                )
+
+
+            }
+        },
+        floatingActionButtonPosition = FabPosition.End
     )
 }
 
 @Composable
 fun Succcess(padding: PaddingValues, vm: DetailScreenVM) {
     val urlState = vm.urlImagen.collectAsState()
-    val url by remember{
+    val url by remember {
         urlState
     }
     val descripcionState = vm.descripcion.collectAsState()
-    val descripcion by remember{
+    val descripcion by remember {
         descripcionState
     }
     val mediaState = vm.urlsGaleria.collectAsState()
@@ -73,11 +85,11 @@ fun Succcess(padding: PaddingValues, vm: DetailScreenVM) {
 }
 
 @Composable
-fun Loading(){
+fun Loading() {
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
-    ){
+    ) {
         CircularProgressIndicator()
     }
 }

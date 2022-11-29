@@ -20,11 +20,11 @@ import com.example.aplicacionciudades.ui.theme.AplicacionCiudadesTheme
 import com.example.aplicacionciudades.view.SplashScreen
 import com.example.aplicacionciudades.view.detailScreen.DetailScreen
 import com.example.aplicacionciudades.view.mainScreen.MainScreen
-import com.example.aplicacionciudades.viewmodel.MainActivityVM
+import com.example.aplicacionciudades.viewmodel.MainScreenVM
 
 class MainActivity : ComponentActivity() {
 
-    private var mainActivityViewModel: MainActivityVM = MainActivityVM()
+    private val mainScreenVM: MainScreenVM = MainScreenVM()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -40,7 +40,8 @@ class MainActivity : ComponentActivity() {
                             SplashScreen(navController)
                         }
                         composable("main") {
-                            val fichasState = mainActivityViewModel.fichas.collectAsState()
+                            mainScreenVM.init()
+                            val fichasState = mainScreenVM.fichas.collectAsState()
                             val listaFichas by remember {
                                 fichasState
                             }
@@ -59,7 +60,9 @@ class MainActivity : ComponentActivity() {
                         ) {
                             DetailScreen(
                                 navController = navController, vm = viewModel()
-                            )
+                            ){
+                                //lambda onClick
+                            }
                         }
                     }
                 }

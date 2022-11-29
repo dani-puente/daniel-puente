@@ -8,12 +8,12 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class MainActivityVM : ViewModel() {
+class MainScreenVM : ViewModel() {
 
     private val _fichas = MutableStateFlow<List<FichaX>>(emptyList())
     val fichas = _fichas.asStateFlow()
 
-    init {
+    fun init() {
         listarFichas()
     }
 

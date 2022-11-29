@@ -20,7 +20,7 @@ class DetailScreenVM(
     private val idFicha = checkNotNull(stateHandle.get<Int>("idFicha"))
     val nombre = checkNotNull(stateHandle.get<String>("nombre"))
 
-    private val _detailState = MutableStateFlow<MyState>(MyState.Idle)
+    private val _detailState = MutableStateFlow(MyState.Idle)
     val detailState = _detailState.asStateFlow()
 
     private val _urlImagen = MutableStateFlow<String?>(null)
@@ -37,8 +37,10 @@ class DetailScreenVM(
     }
 
     private fun getFichaDetail() {
-        //TODO:obtener detalle ficha API
+        //emitir estado loading
         _detailState.value = MyState.Loading
+        //obtener detalle ficha API
+        //evaluar response y emitir estado ok o fail
         launch {
             try {
                 val detail = repo.detail(
@@ -51,14 +53,12 @@ class DetailScreenVM(
                 _urlImagen.value = detail.urlImagen
                 _descripcion.value = detail.descripcion
                 _urlsGaleria.value = detail.media.images
+                // en caso de que salte algun error, lo tratas con trycatch y emites un estado de error
             } catch (ignore: Throwable) {
                 _detailState.value = MyState.Failure
             }
 
         }
-
-        //emitir estado loading
-        //evaluar response y emitir estado ok o fail
         //_detailState.value = State.Success()
     }
 
