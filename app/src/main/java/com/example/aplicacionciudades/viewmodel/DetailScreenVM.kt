@@ -62,4 +62,8 @@ class DetailScreenVM(
         //_detailState.value = State.Success()
     }
 
+    fun establecerFav() {
+        
+    }
+
 }

@@ -3,11 +3,9 @@ package com.example.aplicacionciudades.view.detailScreen
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
@@ -24,16 +22,16 @@ fun getDetailScreenRoute(idFicha: Int, nombre: String): String {
 @Composable
 fun DetailScreen(
     navController: NavController,
-    vm: DetailScreenVM,
-    onClick: () -> Unit
+    vm: DetailScreenVM
 ) {
     val scaffoldState = rememberScaffoldState()
     val detailState = vm.detailState.collectAsState()
     val state by remember {
         detailState
     }
-
-
+    var esFav by remember {
+        mutableStateOf(false)
+    }
     Scaffold(
         scaffoldState = scaffoldState,
         topBar = {
@@ -48,13 +46,20 @@ fun DetailScreen(
             }
         },
         floatingActionButton = {
-            FloatingActionButton(onClick = { onClick() }) {
-                Icon(
-                    imageVector = Icons.Default.FavoriteBorder,
-                    contentDescription = "Boton fav"
-                )
-
-
+            FloatingActionButton(onClick = {vm.establecerFav()}) {
+                IconToggleButton(checked = esFav, onCheckedChange = {
+                    esFav = it
+                }) {
+                    Icon(
+                        imageVector =
+                        if (!esFav) {
+                            Icons.Default.FavoriteBorder
+                        } else {
+                            Icons.Default.Favorite
+                        },
+                        contentDescription = "Boton de favorito"
+                    )
+                }
             }
         },
         floatingActionButtonPosition = FabPosition.End

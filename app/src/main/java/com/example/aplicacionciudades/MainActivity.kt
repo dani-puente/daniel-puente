@@ -60,9 +60,7 @@ class MainActivity : ComponentActivity() {
                         ) {
                             DetailScreen(
                                 navController = navController, vm = viewModel()
-                            ){
-                                //lambda onClick
-                            }
+                            )
                         }
                     }
                 }
