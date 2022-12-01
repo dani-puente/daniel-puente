@@ -5,7 +5,7 @@ import retrofit2.http.Query
 
 interface DetailRepo {
     @GET("/ficha")
-    suspend fun detail(
+    suspend fun getDetail(
         @Query("idFicha") idFicha: Int,
         @Query("TipoFicha") TipoFicha: String,
         @Query("idIdioma") idIdioma: Int,

@@ -3,20 +3,23 @@ package com.example.aplicacionciudades.viewmodel
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.aplicacionciudades.model.consultaapidetail.detailRepo
+import com.example.aplicacionciudades.model.consultaapidetail.RetroRepoDetail
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class DetailScreenVM(
+@HiltViewModel
+class DetailScreenVM @Inject constructor(
+    private val retroRepoDetail: RetroRepoDetail,
     /**
      * stateHandle trae los datos del intent del activity
      */
     private val stateHandle: SavedStateHandle
 ) : ViewModel(), CoroutineScope {
     override val coroutineContext = viewModelScope.coroutineContext
-    private val repo = detailRepo
     private val idFicha = checkNotNull(stateHandle.get<Int>("idFicha"))
     val nombre = checkNotNull(stateHandle.get<String>("nombre"))
 
@@ -43,16 +46,17 @@ class DetailScreenVM(
         //evaluar response y emitir estado ok o fail
         launch {
             try {
-                val detail = repo.detail(
-                    idFicha,
-                    ResourcesObject.tipoFicha,
-                    ResourcesObject.idIdioma,
-                    ResourcesObject.idProyecto
-                )
-                _detailState.value = MyState.Success
-                _urlImagen.value = detail.urlImagen
-                _descripcion.value = detail.descripcion
-                _urlsGaleria.value = detail.media.images
+//                val detail = repo.detail(
+//                    idFicha,
+//                    ResourcesObject.tipoFicha,
+//                    ResourcesObject.idIdioma,
+//                    ResourcesObject.idProyecto
+//                )
+//                val detail = retroRepoDetail.getDetail(idFicha)
+//                _detailState.value = MyState.Success
+//                _urlImagen.value = detail.
+//                _descripcion.value = detail.descripcion
+//                _urlsGaleria.value = detail.media.images
                 // en caso de que salte algun error, lo tratas con trycatch y emites un estado de error
             } catch (ignore: Throwable) {
                 _detailState.value = MyState.Failure

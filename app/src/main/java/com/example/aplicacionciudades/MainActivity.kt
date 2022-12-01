@@ -6,11 +6,8 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -20,11 +17,12 @@ import com.example.aplicacionciudades.ui.theme.AplicacionCiudadesTheme
 import com.example.aplicacionciudades.view.SplashScreen
 import com.example.aplicacionciudades.view.detailScreen.DetailScreen
 import com.example.aplicacionciudades.view.mainScreen.MainScreen
-import com.example.aplicacionciudades.viewmodel.MainScreenVM
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    private val mainScreenVM: MainScreenVM = MainScreenVM()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -40,12 +38,7 @@ class MainActivity : ComponentActivity() {
                             SplashScreen(navController)
                         }
                         composable("main") {
-                            mainScreenVM.init()
-                            val fichasState = mainScreenVM.fichas.collectAsState()
-                            val listaFichas by remember {
-                                fichasState
-                            }
-                            MainScreen(listaFichas, navController)
+                            MainScreen(navController)
                         }
                         composable(
                             "detail/{idFicha}/{nombre}",
@@ -59,7 +52,7 @@ class MainActivity : ComponentActivity() {
                             )
                         ) {
                             DetailScreen(
-                                navController = navController, vm = viewModel()
+                                navController = navController, vm = hiltViewModel()
                             )
                         }
                     }
