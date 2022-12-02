@@ -35,39 +35,31 @@ class DetailScreenVM @Inject constructor(
     private val _urlsGaleria = MutableStateFlow<List<String>>(emptyList())
     val urlsGaleria = _urlsGaleria.asStateFlow()
 
+
     init {
-        getFichaDetail()
+        setDetail()
     }
 
-    private fun getFichaDetail() {
-        //emitir estado loading
-        _detailState.value = MyState.Loading
-        //obtener detalle ficha API
-        //evaluar response y emitir estado ok o fail
+    private fun setDetail() {
         launch {
             try {
-//                val detail = repo.detail(
-//                    idFicha,
-//                    ResourcesObject.tipoFicha,
-//                    ResourcesObject.idIdioma,
-//                    ResourcesObject.idProyecto
-//                )
-//                val detail = retroRepoDetail.getDetail(idFicha)
-//                _detailState.value = MyState.Success
-//                _urlImagen.value = detail.
-//                _descripcion.value = detail.descripcion
-//                _urlsGaleria.value = detail.media.images
+                //emitir estado loading
+                _detailState.value = MyState.Loading
+                //obtener los detalles de la ficha y establecemos su valor en el observable
+                //evaluar response y emitir estado ok o fail
+                _urlImagen.value = retroRepoDetail.getDetail(idFicha).urlImagen
+                _descripcion.value = retroRepoDetail.getDetail(idFicha).descripcion
+                _urlsGaleria.value = retroRepoDetail.getDetail(idFicha).media.images
                 // en caso de que salte algun error, lo tratas con trycatch y emites un estado de error
             } catch (ignore: Throwable) {
                 _detailState.value = MyState.Failure
             }
-
+            _detailState.value = MyState.Success
         }
-        //_detailState.value = State.Success()
     }
 
     fun establecerFav() {
-        
+
     }
 
 }

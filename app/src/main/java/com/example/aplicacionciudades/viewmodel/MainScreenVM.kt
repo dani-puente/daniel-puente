@@ -1,5 +1,6 @@
 package com.example.aplicacionciudades.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.aplicacionciudades.model.consultaapimain.FichaX
@@ -22,21 +23,13 @@ class MainScreenVM @Inject constructor(
     init {
         //listarFichas()
         launch {
-            _fichas.value = retroRepoFicha.getFichas()
+            try {
+                _fichas.value = retroRepoFicha.getFichas()
+            } catch (ignore: Throwable) {
+                Log.e("error", "Entro en Error")
+            }
         }
     }
-
-//    private fun listarFichas() {
-//        viewModelScope.launch {
-//            val fichasService = fichasRepo.listFichas(
-//                ResourcesObject.idCategoriaPadre,
-//                ResourcesObject.idIdioma,
-//                ResourcesObject.idProyecto
-//            )
-//            _fichas.value = fichasService.fichas
-//        }
-//    }
-
 }
 
 

@@ -7,14 +7,16 @@ import javax.inject.Inject
 
 class RetroRepoDetail @Inject constructor(private val repo: DetailRepo) {
 
-    suspend fun getDetail(idFicha: Int) = withContext(Dispatchers.IO) {
-        val response = repo.getDetail(
-            idFicha,
-            ResourcesObject.tipoFicha,
-            ResourcesObject.idIdioma,
-            ResourcesObject.idProyecto
-        )
-        return@withContext response
+    suspend fun getDetail(idFicha: Int): Detail {
+        return withContext(Dispatchers.IO) {
+            val response = repo.getDetail(
+                idFicha,
+                ResourcesObject.tipoFicha,
+                ResourcesObject.idIdioma,
+                ResourcesObject.idProyecto
+            )
+            response
+        }
     }
 //    val retrofit by lazy {
 //        Retrofit.Builder()

@@ -5,9 +5,16 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.material.icons.filled.Warning
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.aplicacionciudades.viewmodel.DetailScreenVM
 import com.example.aplicacionciudades.viewmodel.MyState
@@ -22,14 +29,14 @@ fun getDetailScreenRoute(idFicha: Int, nombre: String): String {
 @Composable
 fun DetailScreen(
     navController: NavController,
-    vm: DetailScreenVM
+    vm: DetailScreenVM = hiltViewModel()
 ) {
     val scaffoldState = rememberScaffoldState()
     val detailState = vm.detailState.collectAsState()
-    val state by remember {
+    val state by remember{
         detailState
     }
-    var esFav by remember {
+    var esFav by rememberSaveable {
         mutableStateOf(false)
     }
     Scaffold(
@@ -39,14 +46,14 @@ fun DetailScreen(
         },
         content = { padding ->
             when (state) {
-                MyState.Idle -> TODO()
+                MyState.Idle -> Loading()
                 MyState.Loading -> Loading()
                 MyState.Success -> Succcess(padding, vm)
-                MyState.Failure -> TODO()
+                MyState.Failure -> Error(navController)
             }
         },
         floatingActionButton = {
-            FloatingActionButton(onClick = {vm.establecerFav()}) {
+            FloatingActionButton(onClick = { vm.establecerFav() }) {
                 IconToggleButton(checked = esFav, onCheckedChange = {
                     esFav = it
                 }) {
@@ -96,5 +103,40 @@ fun Loading() {
         contentAlignment = Alignment.Center
     ) {
         CircularProgressIndicator()
+    }
+}
+
+@Composable
+fun Error(navController: NavController) {
+    Box(modifier = Modifier.fillMaxSize()) {
+        AlertDialog(
+            onDismissRequest = { navController.popBackStack() },
+            confirmButton = {
+                TextButton(onClick = { navController.popBackStack() }) {
+                    Text(text = "Volver atrás")
+                }
+            },
+            title = {
+                Row {
+                    Icon(
+                        imageVector = Icons.Default.Warning,
+                        contentDescription = "Icono de advertencia"
+                    )
+                    Spacer(modifier = Modifier.size(10.dp))
+                    Text(
+                        text = "Error",
+                        color = Color.Black,
+                        fontSize = 20.sp
+
+                    )
+                }
+            },
+            text = {
+                Text(
+                    text = "Se ha producido un error al cargar los datos, inténtelo de nuevo mas tarde",
+                    textAlign = TextAlign.Center
+                )
+            }
+        )
     }
 }

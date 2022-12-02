@@ -14,9 +14,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.aplicacionciudades.ui.theme.AplicacionCiudadesTheme
-import com.example.aplicacionciudades.view.SplashScreen
 import com.example.aplicacionciudades.view.detailScreen.DetailScreen
 import com.example.aplicacionciudades.view.mainScreen.MainScreen
+import com.example.aplicacionciudades.view.splashScreen.SplashScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
