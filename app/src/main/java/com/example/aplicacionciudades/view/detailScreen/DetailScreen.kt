@@ -6,7 +6,10 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Warning
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -33,17 +36,36 @@ fun DetailScreen(
 ) {
     val scaffoldState = rememberScaffoldState()
     val detailState = vm.detailState.collectAsState()
-    val state by remember{
+    val esFavState = vm.esFav.collectAsState()
+    val state by remember {
         detailState
     }
-    var esFav by rememberSaveable {
-        mutableStateOf(false)
+    val esFav by rememberSaveable {
+        esFavState
     }
     Scaffold(
         scaffoldState = scaffoldState,
         topBar = {
             MakeToolbarDetail(navController, vm.nombre)
         },
+        floatingActionButton = {
+            FloatingActionButton(onClick = { }) {
+                IconToggleButton(checked = esFav, onCheckedChange = {
+                    onClick(esFav, vm)
+                }) {
+                    Icon(
+                        imageVector =
+                        if (esFav) {
+                            Icons.Default.Favorite
+                        } else {
+                            Icons.Default.FavoriteBorder
+                        },
+                        contentDescription = "Boton de favorito"
+                    )
+                }
+            }
+        },
+        floatingActionButtonPosition = FabPosition.End,
         content = { padding ->
             when (state) {
                 MyState.Idle -> Loading()
@@ -51,26 +73,17 @@ fun DetailScreen(
                 MyState.Success -> Succcess(padding, vm)
                 MyState.Failure -> Error(navController)
             }
-        },
-        floatingActionButton = {
-            FloatingActionButton(onClick = { vm.establecerFav() }) {
-                IconToggleButton(checked = esFav, onCheckedChange = {
-                    esFav = it
-                }) {
-                    Icon(
-                        imageVector =
-                        if (!esFav) {
-                            Icons.Default.FavoriteBorder
-                        } else {
-                            Icons.Default.Favorite
-                        },
-                        contentDescription = "Boton de favorito"
-                    )
-                }
-            }
-        },
-        floatingActionButtonPosition = FabPosition.End
+        }
     )
+}
+
+fun onClick(esFav: Boolean, vm: DetailScreenVM) {
+    val onClick = if (esFav) {
+        vm.borrarFav()
+    } else {
+        vm.establecerFav()
+    }
+    return onClick
 }
 
 @Composable

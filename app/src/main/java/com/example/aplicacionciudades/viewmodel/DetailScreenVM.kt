@@ -4,6 +4,8 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.aplicacionciudades.model.consultaapidetail.RetroRepoDetail
+import com.example.aplicacionciudades.model.database.dao.FavDao
+import com.example.aplicacionciudades.model.database.entities.FavEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,6 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class DetailScreenVM @Inject constructor(
     private val retroRepoDetail: RetroRepoDetail,
+    private val favDao: FavDao,
     /**
      * stateHandle trae los datos del intent del activity
      */
@@ -35,6 +38,9 @@ class DetailScreenVM @Inject constructor(
     private val _urlsGaleria = MutableStateFlow<List<String>>(emptyList())
     val urlsGaleria = _urlsGaleria.asStateFlow()
 
+    private val _esFav = MutableStateFlow<Boolean>(false)
+    val esFav = _esFav.asStateFlow()
+
 
     init {
         setDetail()
@@ -50,6 +56,7 @@ class DetailScreenVM @Inject constructor(
                 _urlImagen.value = retroRepoDetail.getDetail(idFicha).urlImagen
                 _descripcion.value = retroRepoDetail.getDetail(idFicha).descripcion
                 _urlsGaleria.value = retroRepoDetail.getDetail(idFicha).media.images
+                _esFav.value = favDao.estaEnFavoritos(idFicha).isNotEmpty()
                 // en caso de que salte algun error, lo tratas con trycatch y emites un estado de error
             } catch (ignore: Throwable) {
                 _detailState.value = MyState.Failure
@@ -59,7 +66,19 @@ class DetailScreenVM @Inject constructor(
     }
 
     fun establecerFav() {
-
+        launch {
+            favDao.insertarFav(FavEntity(idFicha))
+        }
     }
+
+    fun borrarFav() {
+        launch {
+            favDao.borrarFav(FavEntity(idFicha))
+        }
+    }
+
+
+//    fun getAllFavs(): List<Int> {
+//    }
 
 }

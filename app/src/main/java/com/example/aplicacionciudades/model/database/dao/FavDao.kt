@@ -1,18 +1,18 @@
 package com.example.aplicacionciudades.model.database.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import com.example.aplicacionciudades.model.database.entities.FavEntity
 
+//Data Access Object
 @Dao
 interface FavDao {
+    //Con : le estoy diciendo que recupere los valores pasados por parametro de la suspend fun
+    @Query("SELECT * FROM favoritos WHERE idFicha = :idFicha")
+    suspend fun estaEnFavoritos(idFicha: Int): List<FavEntity>
 
-    @Query("SELECT * FROM favoritos")
-    suspend fun getId():List<FavEntity>
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertarFav(fav: FavEntity)
 
-    @Insert
-    suspend fun insertarFav(idFicha: Int){
-
-    }
+    @Delete
+    suspend fun borrarFav(fav: FavEntity)
 }
