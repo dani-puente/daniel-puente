@@ -38,8 +38,9 @@ class DetailScreenVM @Inject constructor(
     private val _urlsGaleria = MutableStateFlow<List<String>>(emptyList())
     val urlsGaleria = _urlsGaleria.asStateFlow()
 
-    private val _esFav = MutableStateFlow<Boolean>(false)
+    private val _esFav = MutableStateFlow(false)
     val esFav = _esFav.asStateFlow()
+
 
 
     init {
@@ -79,6 +80,9 @@ class DetailScreenVM @Inject constructor(
 
 
 //    fun getAllFavs(): List<Int> {
+//        launch {
+//            favDao.listarFavoritos()
+//        }
 //    }
 
 }

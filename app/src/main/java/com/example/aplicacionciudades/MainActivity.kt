@@ -16,6 +16,7 @@ import androidx.navigation.navArgument
 import com.example.aplicacionciudades.ui.theme.AplicacionCiudadesTheme
 import com.example.aplicacionciudades.view.detailScreen.DetailScreen
 import com.example.aplicacionciudades.view.mainScreen.MainScreen
+import com.example.aplicacionciudades.view.screenFavs.FavsScreen
 import com.example.aplicacionciudades.view.splashScreen.SplashScreen
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -54,6 +55,9 @@ class MainActivity : ComponentActivity() {
                             DetailScreen(
                                 navController = navController, vm = hiltViewModel()
                             )
+                        }
+                        composable("favoritos"){
+                            FavsScreen(navController = navController, vm = hiltViewModel())
                         }
                     }
                 }

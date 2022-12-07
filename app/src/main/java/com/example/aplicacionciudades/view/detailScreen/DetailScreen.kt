@@ -43,27 +43,30 @@ fun DetailScreen(
     val esFav by rememberSaveable {
         esFavState
     }
+
     Scaffold(
         scaffoldState = scaffoldState,
         topBar = {
             MakeToolbarDetail(navController, vm.nombre)
         },
         floatingActionButton = {
-            FloatingActionButton(onClick = { }) {
-                IconToggleButton(checked = esFav, onCheckedChange = {
-                    onClick(esFav, vm)
-                }) {
-                    Icon(
-                        imageVector =
-                        if (esFav) {
-                            Icons.Default.Favorite
-                        } else {
-                            Icons.Default.FavoriteBorder
-                        },
-                        contentDescription = "Boton de favorito"
-                    )
-                }
+            FloatingActionButton(onClick = {
+                onClick(esFav, vm)
+            }) {
+//                IconToggleButton(checked = esFav, onCheckedChange = {
+//                    onClick(esFav, vm)
+//                }) {
+                Icon(
+                    imageVector =
+                    if (esFav) {
+                        Icons.Default.Favorite
+                    } else {
+                        Icons.Default.FavoriteBorder
+                    },
+                    contentDescription = "Boton de favorito"
+                )
             }
+//        }
         },
         floatingActionButtonPosition = FabPosition.End,
         content = { padding ->
@@ -73,17 +76,16 @@ fun DetailScreen(
                 MyState.Success -> Succcess(padding, vm)
                 MyState.Failure -> Error(navController)
             }
-        }
+        },
     )
 }
 
 fun onClick(esFav: Boolean, vm: DetailScreenVM) {
-    val onClick = if (esFav) {
+    if (esFav) {
         vm.borrarFav()
     } else {
         vm.establecerFav()
     }
-    return onClick
 }
 
 @Composable

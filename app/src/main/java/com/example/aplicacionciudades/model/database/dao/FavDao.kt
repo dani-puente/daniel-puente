@@ -15,4 +15,7 @@ interface FavDao {
 
     @Delete
     suspend fun borrarFav(fav: FavEntity)
+
+    @Query("SELECT * FROM favoritos")
+    suspend fun listarFavoritos(): List<FavEntity>
 }
