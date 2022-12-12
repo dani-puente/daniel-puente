@@ -50,23 +50,25 @@ fun DetailScreen(
             MakeToolbarDetail(navController, vm.nombre)
         },
         floatingActionButton = {
-            FloatingActionButton(onClick = {
-                onClick(esFav, vm)
-            }) {
+            if (state == MyState.Success) {
+                FloatingActionButton(onClick = {
+                    onClick(esFav, vm)
+                }) {
 //                IconToggleButton(checked = esFav, onCheckedChange = {
 //                    onClick(esFav, vm)
 //                }) {
-                Icon(
-                    imageVector =
-                    if (esFav) {
-                        Icons.Default.Favorite
-                    } else {
-                        Icons.Default.FavoriteBorder
-                    },
-                    contentDescription = "Boton de favorito"
-                )
-            }
+                    Icon(
+                        imageVector =
+                        if (esFav) {
+                            Icons.Default.Favorite
+                        } else {
+                            Icons.Default.FavoriteBorder
+                        },
+                        contentDescription = "Boton de favorito"
+                    )
+                }
 //        }
+            }
         },
         floatingActionButtonPosition = FabPosition.End,
         content = { padding ->
