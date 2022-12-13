@@ -19,25 +19,23 @@ class FavsScreenVM @Inject constructor(
     retroRepoFicha: RetroRepoFicha
 ) : ViewModel(), CoroutineScope {
     override val coroutineContext = viewModelScope.coroutineContext
-    private val _fichas = MutableStateFlow<List<FichaX>>(emptyList())
+
+    private val _fichas = MutableStateFlow(emptyList<FichaX>())
     val fichas = _fichas.asStateFlow()
 
     init {
+        getFavoritos(retroRepoFicha)
+    }
+
+    fun getFavoritos(retroRepoFicha: RetroRepoFicha) {
         launch {
-            try {
-                val fichas = retroRepoFicha.getFichas()
-                val entities = favDao.listarFavoritos()
-                val fichasFav: MutableList<FichaX> = mutableListOf()
-                for (ficha in fichas){
-                    for (entity in entities){
-                        if (ficha.idFicha == entity.idFicha){
-                            fichasFav.add(ficha)
-                        }
-                    }
+            favDao.getFavoritos().collect { favoritosIds ->
+                try {
+                    val fichas = retroRepoFicha.getFichas()
+                    _fichas.value = fichas.filter { favoritosIds.contains(it.idFicha) }
+                } catch (error: Throwable) {
+                    Log.e("favsScreen", "Entro en el error en el metodo", error)
                 }
-                _fichas.value = fichasFav
-            } catch (ignore: Throwable) {
-                Log.e("error", "Entro en el error")
             }
         }
     }

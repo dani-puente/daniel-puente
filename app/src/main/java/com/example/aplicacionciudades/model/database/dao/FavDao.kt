@@ -1,21 +1,29 @@
 package com.example.aplicacionciudades.model.database.dao
 
 import androidx.room.*
+import com.example.aplicacionciudades.domain.model.toDomain
 import com.example.aplicacionciudades.model.database.entities.FavEntity
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 //Data Access Object
 @Dao
-interface FavDao {
+abstract class FavDao {
     //Con : le estoy diciendo que recupere los valores pasados por parametro de la suspend fun
-    @Query("SELECT * FROM favoritos WHERE idFicha = :idFicha")
-    suspend fun estaEnFavoritos(idFicha: Int): List<FavEntity>
+    @Query("SELECT EXISTS(SELECT * FROM favoritos WHERE idFicha = :idFicha)")
+    abstract fun estaEnFavoritos(idFicha: Int): Flow<Boolean>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertarFav(fav: FavEntity)
+    abstract suspend fun insertarFav(fav: FavEntity)
 
     @Delete
-    suspend fun borrarFav(fav: FavEntity)
+    abstract suspend fun borrarFav(fav: FavEntity)
 
     @Query("SELECT * FROM favoritos")
-    suspend fun listarFavoritos(): List<FavEntity>
+    protected abstract fun _getFavoritos(): Flow<List<FavEntity>>
+
+    //Mapea de entidad al modelo de datos que va a utilizar el ViewModel para tratar los datos
+    fun getFavoritos() = _getFavoritos().map { favs -> favs.map { it.toDomain() } }
+
+
 }

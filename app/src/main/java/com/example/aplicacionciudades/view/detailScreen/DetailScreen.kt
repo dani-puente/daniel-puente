@@ -1,5 +1,6 @@
 package com.example.aplicacionciudades.view.detailScreen
 
+import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -43,6 +44,7 @@ fun DetailScreen(
     val esFav by rememberSaveable {
         esFavState
     }
+    Log.i("bool", "$esFav")
 
     Scaffold(
         scaffoldState = scaffoldState,
@@ -52,7 +54,7 @@ fun DetailScreen(
         floatingActionButton = {
             if (state == MyState.Success) {
                 FloatingActionButton(onClick = {
-                    onClick(esFav, vm)
+                        onClick(esFav, vm)
                 }) {
 //                IconToggleButton(checked = esFav, onCheckedChange = {
 //                    onClick(esFav, vm)

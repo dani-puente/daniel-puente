@@ -42,9 +42,11 @@ class DetailScreenVM @Inject constructor(
     val esFav = _esFav.asStateFlow()
 
 
-
     init {
         setDetail()
+        launch {
+            favDao.estaEnFavoritos(idFicha).collect { _esFav.value = it }
+        }
     }
 
     private fun setDetail() {
@@ -57,7 +59,6 @@ class DetailScreenVM @Inject constructor(
                 _urlImagen.value = retroRepoDetail.getDetail(idFicha).urlImagen
                 _descripcion.value = retroRepoDetail.getDetail(idFicha).descripcion
                 _urlsGaleria.value = retroRepoDetail.getDetail(idFicha).media.images
-                _esFav.value = favDao.estaEnFavoritos(idFicha).isNotEmpty()
                 // en caso de que salte algun error, lo tratas con trycatch y emites un estado de error
             } catch (ignore: Throwable) {
                 _detailState.value = MyState.Failure
