@@ -1,8 +1,5 @@
 package com.example.aplicacionciudades.model.consultaapimain
 
-import kotlinx.serialization.Serializable
-
-@Serializable
 data class FichaX(
     val descripcionCorta: String,
     val distanciaUsuarioMetros: Any,
