@@ -1,4 +1,4 @@
-package com.example.aplicacionciudades.view
+package com.example.aplicacionciudades.view.splashScreen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box

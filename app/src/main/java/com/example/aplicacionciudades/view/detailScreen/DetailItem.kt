@@ -31,10 +31,11 @@ fun DetailItem(urlImagen: String?, descCorta: String?, urlsImagen: List<String?>
             )
         }
         stickyHeader {
-            Box(modifier = Modifier
-                .fillMaxSize()
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
                 // Con esto hacemos que el stickyHeader tenga fondo y no sea transparente
-               // .background(Color.White)
+                // .background(Color.White)
             ) {
                 Text(
                     text = "Descripción corta",
@@ -42,8 +43,8 @@ fun DetailItem(urlImagen: String?, descCorta: String?, urlsImagen: List<String?>
                         fontSize = 25.sp,
                         shadow = Shadow(
                             color = Color.Black,
-                            offset = Offset(10.0f, 10.0f),
-                            blurRadius = 10f
+                            offset = Offset(5.0f, 5.0f),
+                            blurRadius = 30f
                         )
                     )
                 )
@@ -62,8 +63,9 @@ fun DetailItem(urlImagen: String?, descCorta: String?, urlsImagen: List<String?>
             }
         }
         stickyHeader {
-            Box(modifier = Modifier
-                .fillMaxSize()
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
                 //.background(Color.White)
             ) {
                 Text(
@@ -80,8 +82,12 @@ fun DetailItem(urlImagen: String?, descCorta: String?, urlsImagen: List<String?>
             }
 
         }
-        items(urlsImagen.size) {
-            Imagen(urlImagen = urlsImagen[it])
+        if (urlsImagen.isEmpty()) {
+            item { GaleriaVacia() }
+        } else {
+            items(urlsImagen.size) {
+                Imagen(urlImagen = urlsImagen[it])
+            }
         }
     }
 }
@@ -97,5 +103,15 @@ private fun Imagen(urlImagen: String?) {
             .fillMaxSize()
             .padding(15.dp)
     )
+}
+
+@Composable
+private fun GaleriaVacia() {
+    Box(
+        modifier = Modifier.fillMaxWidth().height(400.dp),
+        contentAlignment = Alignment.Center
+    ) {
+        Text(text = "La galería esta vacia :(")
+    }
 }
 

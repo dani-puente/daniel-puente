@@ -3,24 +3,30 @@ package com.example.aplicacionciudades.viewmodel
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.aplicacionciudades.model.consultaapidetail.detailRepo
+import com.example.aplicacionciudades.model.consultaapidetail.RetroRepoDetail
+import com.example.aplicacionciudades.model.database.dao.FavDao
+import com.example.aplicacionciudades.model.database.entities.FavEntity
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class DetailScreenVM(
+@HiltViewModel
+class DetailScreenVM @Inject constructor(
+    private val retroRepoDetail: RetroRepoDetail,
+    private val favDao: FavDao,
     /**
      * stateHandle trae los datos del intent del activity
      */
     private val stateHandle: SavedStateHandle
 ) : ViewModel(), CoroutineScope {
     override val coroutineContext = viewModelScope.coroutineContext
-    private val repo = detailRepo
     private val idFicha = checkNotNull(stateHandle.get<Int>("idFicha"))
     val nombre = checkNotNull(stateHandle.get<String>("nombre"))
 
-    private val _detailState = MutableStateFlow<MyState>(MyState.Idle)
+    private val _detailState = MutableStateFlow(MyState.Idle)
     val detailState = _detailState.asStateFlow()
 
     private val _urlImagen = MutableStateFlow<String?>(null)
@@ -32,34 +38,52 @@ class DetailScreenVM(
     private val _urlsGaleria = MutableStateFlow<List<String>>(emptyList())
     val urlsGaleria = _urlsGaleria.asStateFlow()
 
+    private val _esFav = MutableStateFlow(false)
+    val esFav = _esFav.asStateFlow()
+
+
     init {
-        getFichaDetail()
+        setDetail()
+        launch {
+            favDao.estaEnFavoritos(idFicha).collect { _esFav.value = it }
+        }
     }
 
-    private fun getFichaDetail() {
-        //TODO:obtener detalle ficha API
-        _detailState.value = MyState.Loading
+    private fun setDetail() {
         launch {
             try {
-                val detail = repo.detail(
-                    idFicha,
-                    ResourcesObject.tipoFicha,
-                    ResourcesObject.idIdioma,
-                    ResourcesObject.idProyecto
-                )
-                _detailState.value = MyState.Success
-                _urlImagen.value = detail.urlImagen
-                _descripcion.value = detail.descripcion
-                _urlsGaleria.value = detail.media.images
+                //emitir estado loading
+                _detailState.value = MyState.Loading
+                //obtener los detalles de la ficha y establecemos su valor en el observable
+                //evaluar response y emitir estado ok o fail
+                _urlImagen.value = retroRepoDetail.getDetail(idFicha).urlImagen
+                _descripcion.value = retroRepoDetail.getDetail(idFicha).descripcion
+                _urlsGaleria.value = retroRepoDetail.getDetail(idFicha).media.images
+                // en caso de que salte algun error, lo tratas con trycatch y emites un estado de error
             } catch (ignore: Throwable) {
                 _detailState.value = MyState.Failure
             }
-
+            _detailState.value = MyState.Success
         }
-
-        //emitir estado loading
-        //evaluar response y emitir estado ok o fail
-        //_detailState.value = State.Success()
     }
+
+    fun establecerFav() {
+        launch {
+            favDao.insertarFav(FavEntity(idFicha))
+        }
+    }
+
+    fun borrarFav() {
+        launch {
+            favDao.borrarFav(FavEntity(idFicha))
+        }
+    }
+
+
+//    fun getAllFavs(): List<Int> {
+//        launch {
+//            favDao.listarFavoritos()
+//        }
+//    }
 
 }
