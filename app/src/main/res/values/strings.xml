@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">AplicacionCiudades</string>
+    <string name="app_name">León de cerca</string>
+    <string name="menu">Menú</string>
+    <string name="item_favoritos">Favoritos</string>
 </resources>

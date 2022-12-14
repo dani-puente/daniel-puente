@@ -18,26 +18,34 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun MainScreen(navController: NavController, vm: MainScreenVM = hiltViewModel()) {
-
+    //Con rememberScaffoldState, guarda el estado del Scaffold
     val scaffoldState = rememberScaffoldState()
+    //Guarda el ambito de la corrrutina
     val scope = rememberCoroutineScope()
     val icono = R.drawable.ic_favorito_lleno
     val fichasState = vm.fichas.collectAsState()
+    //Esta escuchando fichasState se repintara en caso de que fichas cambie
     val fichas by remember {
         fichasState
     }
     Scaffold(
         scaffoldState = scaffoldState,
         topBar = {
+            //Este metodo crea la toolbar
             MakeToolbarMain {
+                //Lanza la accion de sacar el DrawerState, tiene que estar en una corrutina
                 scope.launch { scaffoldState.drawerState.open() }
             }
         },
+        //Aqui metemos el contenido del DrawerView
         drawerContent = {
+            //Creamos el DrawerView
             MakeDrawerView(icono = icono, navController)
         },
+        //Indicamos que contenido a va tener el Scaffold, es conveniente pasar el padding, por compatibilidad en distintos dispositivos
         content = { padding ->
             Column(modifier = Modifier.padding(padding)) {
+                //metodo que dibuja los lugares
                 MakeItemPlaceList(listaLugares = fichas) {
                     navController.navigate(getDetailScreenRoute(it.idFicha, it.nombre))
                 }

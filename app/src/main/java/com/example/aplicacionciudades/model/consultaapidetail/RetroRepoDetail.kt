@@ -18,12 +18,4 @@ class RetroRepoDetail @Inject constructor(private val repo: DetailRepo) {
             response
         }
     }
-//    val retrofit by lazy {
-//        Retrofit.Builder()
-//            .addConverterFactory(GsonConverterFactory.create())
-//            .baseUrl("https://tuciudaddecerca-api.proconsi.com")
-//            .build()
-//    }
 }
-
-//val detailRepo = RetroRepoDetail.retrofit.create(DetailRepo::class.java)

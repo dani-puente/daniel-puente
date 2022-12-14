@@ -60,7 +60,7 @@ class DetailScreenVM @Inject constructor(
                 _descripcion.value = retroRepoDetail.getDetail(idFicha).descripcion
                 _urlsGaleria.value = retroRepoDetail.getDetail(idFicha).media.images
                 // en caso de que salte algun error, lo tratas con trycatch y emites un estado de error
-            } catch (ignore: Throwable) {
+            } catch (error: Throwable) {
                 _detailState.value = MyState.Failure
             }
             _detailState.value = MyState.Success
@@ -78,12 +78,5 @@ class DetailScreenVM @Inject constructor(
             favDao.borrarFav(FavEntity(idFicha))
         }
     }
-
-
-//    fun getAllFavs(): List<Int> {
-//        launch {
-//            favDao.listarFavoritos()
-//        }
-//    }
 
 }

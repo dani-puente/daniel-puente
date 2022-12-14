@@ -9,6 +9,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.example.aplicacionciudades.view.res.AplicacionCiudades
 
 @Composable
 fun DrawerBody(
@@ -23,7 +24,7 @@ fun DrawerBody(
                 .padding(16.dp)
             ) {
                 Icon(imageVector = item.icon, contentDescription = null)
-                Spacer(modifier = Modifier.width(16.dp))
+                Spacer(modifier = Modifier.width(AplicacionCiudades.horizontalSpace))
                 Text(text = item.title)
             }
         }
