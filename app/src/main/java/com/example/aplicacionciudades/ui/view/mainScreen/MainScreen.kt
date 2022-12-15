@@ -1,19 +1,24 @@
 package com.example.aplicacionciudades.view.mainScreen
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Scaffold
-import androidx.compose.material.rememberScaffoldState
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Warning
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.aplicacionciudades.R
+import com.example.aplicacionciudades.model.consultaapimain.FichaX
 import com.example.aplicacionciudades.view.detailScreen.getDetailScreenRoute
 import com.example.aplicacionciudades.view.mainScreen.cardsLugares.MakeItemPlaceList
 import com.example.aplicacionciudades.view.mainScreen.drawer.MakeDrawerView
 import com.example.aplicacionciudades.view.mainScreen.toolbar.MakeToolbarMain
+import com.example.aplicacionciudades.view.res.Loading
 import com.example.aplicacionciudades.viewmodel.MainScreenVM
+import com.example.aplicacionciudades.viewmodel.MyState
 import kotlinx.coroutines.launch
 
 @Composable
@@ -27,6 +32,10 @@ fun MainScreen(navController: NavController, vm: MainScreenVM = hiltViewModel())
     //Esta escuchando fichasState se repintara en caso de que fichas cambie
     val fichas by remember {
         fichasState
+    }
+    val detailState = vm.detailState.collectAsState()
+    val state by remember {
+        detailState
     }
     Scaffold(
         scaffoldState = scaffoldState,
@@ -44,12 +53,45 @@ fun MainScreen(navController: NavController, vm: MainScreenVM = hiltViewModel())
         },
         //Indicamos que contenido a va tener el Scaffold, es conveniente pasar el padding, por compatibilidad en distintos dispositivos
         content = { padding ->
-            Column(modifier = Modifier.padding(padding)) {
-                //metodo que dibuja los lugares
-                MakeItemPlaceList(listaLugares = fichas) {
-                    navController.navigate(getDetailScreenRoute(it.idFicha, it.nombre))
-                }
+            when (state) {
+                MyState.Idle -> Loading()
+                MyState.Loading -> Loading()
+                MyState.Success -> Success(
+                    navController = navController,
+                    padding = padding,
+                    fichas = fichas
+                )
+                MyState.Failure -> Error(
+                    navController = navController
+                )
             }
         }
     )
+}
+
+@Composable
+fun Error(navController: NavController) {
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Icon(Icons.Filled.Warning, contentDescription = null)
+        TextButton(
+            onClick = { navController.navigate("main") }
+        ) {
+            Text(text = stringResource(R.string.boton))
+        }
+
+    }
+}
+
+@Composable
+fun Success(navController: NavController, padding: PaddingValues, fichas: List<FichaX>) {
+    Column(modifier = Modifier.padding(padding)) {
+        //metodo que dibuja los lugares
+        MakeItemPlaceList(listaLugares = fichas) {
+            navController.navigate(getDetailScreenRoute(it.idFicha, it.nombre))
+        }
+    }
 }

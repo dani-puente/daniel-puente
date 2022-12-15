@@ -14,7 +14,7 @@ fun MakeToolbarDetail(navConttroller: NavController, nombre: String?) {
     TopAppBar(
         title = { nombre?.let { Text(it) } },
         navigationIcon = {
-            IconButton(onClick = { navConttroller.popBackStack() }) {
+            IconButton(onClick = { navConttroller.navigate("main") }) {
                 Icon(
                     imageVector = Icons.Default.ArrowBack,
                     contentDescription = "Botón atrás"

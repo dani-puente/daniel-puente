@@ -1,6 +1,5 @@
 package com.example.aplicacionciudades.view.detailScreen
 
-import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -14,12 +13,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.example.aplicacionciudades.R
+import com.example.aplicacionciudades.view.res.Loading
 import com.example.aplicacionciudades.viewmodel.DetailScreenVM
 import com.example.aplicacionciudades.viewmodel.MyState
 
@@ -44,7 +42,6 @@ fun DetailScreen(
     val esFav by rememberSaveable {
         esFavState
     }
-    Log.i("bool", "$esFav")
 
     Scaffold(
         scaffoldState = scaffoldState,
@@ -52,13 +49,11 @@ fun DetailScreen(
             MakeToolbarDetail(navController, vm.nombre)
         },
         floatingActionButton = {
+            //Mostramos el FAB si se han cargado los datos
             if (state == MyState.Success) {
                 FloatingActionButton(onClick = {
                         onClick(esFav, vm)
                 }) {
-//                IconToggleButton(checked = esFav, onCheckedChange = {
-//                    onClick(esFav, vm)
-//                }) {
                     Icon(
                         imageVector =
                         if (esFav) {
@@ -66,10 +61,9 @@ fun DetailScreen(
                         } else {
                             Icons.Default.FavoriteBorder
                         },
-                        contentDescription = "Boton de favorito"
+                        contentDescription = null
                     )
                 }
-//        }
             }
         },
         floatingActionButtonPosition = FabPosition.End,
@@ -78,7 +72,10 @@ fun DetailScreen(
                 MyState.Idle -> Loading()
                 MyState.Loading -> Loading()
                 MyState.Success -> Succcess(padding, vm)
-                MyState.Failure -> Error(navController)
+                MyState.Failure -> Error(
+                    navController = navController,
+                    vm = vm
+                )
             }
         },
     )
@@ -116,46 +113,19 @@ fun Succcess(padding: PaddingValues, vm: DetailScreenVM) {
 }
 
 @Composable
-fun Loading() {
-    Box(
+fun Error(navController: NavController, vm: DetailScreenVM) {
+    Column(
         modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
     ) {
-        CircularProgressIndicator()
+        Icon(Icons.Filled.Warning, contentDescription = null)
+        TextButton(
+            onClick = { navController.navigate(getDetailScreenRoute(vm.idFicha, vm.nombre)) }
+        ) {
+            Text(text = stringResource(R.string.boton))
+        }
     }
 }
 
-@Composable
-fun Error(navController: NavController) {
-    Box(modifier = Modifier.fillMaxSize()) {
-        AlertDialog(
-            onDismissRequest = { navController.popBackStack() },
-            confirmButton = {
-                TextButton(onClick = { navController.popBackStack() }) {
-                    Text(text = "Volver atrás")
-                }
-            },
-            title = {
-                Row {
-                    Icon(
-                        imageVector = Icons.Default.Warning,
-                        contentDescription = "Icono de advertencia"
-                    )
-                    Spacer(modifier = Modifier.size(10.dp))
-                    Text(
-                        text = "Error",
-                        color = Color.Black,
-                        fontSize = 20.sp
 
-                    )
-                }
-            },
-            text = {
-                Text(
-                    text = "Se ha producido un error al cargar los datos, inténtelo de nuevo mas tarde",
-                    textAlign = TextAlign.Center
-                )
-            }
-        )
-    }
-}

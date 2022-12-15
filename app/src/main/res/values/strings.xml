@@ -2,4 +2,12 @@
     <string name="app_name">León de cerca</string>
     <string name="menu">Menú</string>
     <string name="item_favoritos">Favoritos</string>
+    <string name="cardsVacio">No hay nada que mostrar</string>
+    <string name="topAppBarName">León</string>
+    <string name="descripcionCorta">Descripción corta</string>
+    <string name="galeria">Galería</string>
+    <string name="galeriaVacia">La galería esta vacia :(</string>
+    <string name="boton">Reintentar</string>
+    <string name="favs">Favoritos</string>
+    <string name="errorCarga">Error al cargar los datos</string>
 </resources>

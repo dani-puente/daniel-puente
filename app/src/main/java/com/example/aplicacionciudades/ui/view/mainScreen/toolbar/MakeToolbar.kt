@@ -7,13 +7,15 @@ import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
+import com.example.aplicacionciudades.R
 
 @Composable
 fun MakeToolbarMain(
     onNavigationIconClick: () -> Unit,
 ) {
     TopAppBar(
-        title = { Text("León") },
+        title = { Text(stringResource(R.string.topAppBarName)) },
         navigationIcon = {
             IconButton(onClick = onNavigationIconClick) {
                 Icon(

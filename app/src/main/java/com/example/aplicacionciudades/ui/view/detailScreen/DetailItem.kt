@@ -11,11 +11,12 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.example.aplicacionciudades.R
+import com.example.aplicacionciudades.view.res.AplicacionCiudades
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -24,10 +25,10 @@ fun DetailItem(urlImagen: String?, descCorta: String?, urlsImagen: List<String?>
         item {
             AsyncImage(
                 model = urlImagen,
-                contentDescription = "Imagen de detalle",
+                contentDescription = null,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(270.dp)
+                    .height(AplicacionCiudades.heightHeader)
             )
         }
         stickyHeader {
@@ -38,13 +39,13 @@ fun DetailItem(urlImagen: String?, descCorta: String?, urlsImagen: List<String?>
                 // .background(Color.White)
             ) {
                 Text(
-                    text = "Descripción corta",
+                    text = stringResource(R.string.descripcionCorta),
                     style = TextStyle(
-                        fontSize = 25.sp,
+                        fontSize = AplicacionCiudades.subtitulos,
                         shadow = Shadow(
                             color = Color.Black,
-                            offset = Offset(5.0f, 5.0f),
-                            blurRadius = 30f
+                            offset = Offset(AplicacionCiudades.offsetX, AplicacionCiudades.offsetY),
+                            blurRadius = AplicacionCiudades.blurRadius
                         )
                     )
                 )
@@ -56,8 +57,8 @@ fun DetailItem(urlImagen: String?, descCorta: String?, urlsImagen: List<String?>
                     text = textDesc,
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(15.dp),
-                    fontSize = 18.sp,
+                        .padding(AplicacionCiudades.paddingBetweenItems),
+                    fontSize = AplicacionCiudades.texto,
                     textAlign = TextAlign.Justify
                 )
             }
@@ -69,13 +70,13 @@ fun DetailItem(urlImagen: String?, descCorta: String?, urlsImagen: List<String?>
                 //.background(Color.White)
             ) {
                 Text(
-                    text = "Galeria",
+                    text = stringResource(R.string.galeria),
                     style = TextStyle(
-                        fontSize = 25.sp,
+                        fontSize = AplicacionCiudades.subtitulos,
                         shadow = Shadow(
                             color = Color.Black,
-                            offset = Offset(10.0f, 10.0f),
-                            blurRadius = 10f
+                            offset = Offset(AplicacionCiudades.offsetX, AplicacionCiudades.offsetY),
+                            blurRadius = AplicacionCiudades.blurRadius
                         )
                     )
                 )
@@ -96,22 +97,24 @@ fun DetailItem(urlImagen: String?, descCorta: String?, urlsImagen: List<String?>
 private fun Imagen(urlImagen: String?) {
     AsyncImage(
         model = urlImagen,
-        contentDescription = "Imagen galeria",
+        contentDescription = null,
         contentScale = ContentScale.Crop,
         alignment = Alignment.Center,
         modifier = Modifier
             .fillMaxSize()
-            .padding(15.dp)
+            .padding(AplicacionCiudades.paddingBetweenItems)
     )
 }
 
 @Composable
 private fun GaleriaVacia() {
     Box(
-        modifier = Modifier.fillMaxWidth().height(400.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(AplicacionCiudades.heightEmptyGallery),
         contentAlignment = Alignment.Center
     ) {
-        Text(text = "La galería esta vacia :(")
+        Text(text = stringResource(R.string.galeriaVacia))
     }
 }
 

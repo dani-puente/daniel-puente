@@ -9,8 +9,10 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.example.aplicacionciudades.R
 import com.example.aplicacionciudades.view.detailScreen.MakeToolbarDetail
 import com.example.aplicacionciudades.view.detailScreen.getDetailScreenRoute
 import com.example.aplicacionciudades.view.mainScreen.cardsLugares.MakeItemPlaceList
@@ -27,7 +29,7 @@ fun FavsScreen(navController: NavController, vm: FavsScreenVM = hiltViewModel())
     Scaffold(
         scaffoldState = scaffoldState,
         topBar = {
-            MakeToolbarDetail(navConttroller = navController, nombre = "Favoritos")
+            MakeToolbarDetail(navConttroller = navController, nombre = stringResource(R.string.favs))
         },
         content = { padding ->
             Column(modifier = Modifier.padding(padding)) {

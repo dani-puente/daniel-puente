@@ -23,7 +23,7 @@ class DetailScreenVM @Inject constructor(
     private val stateHandle: SavedStateHandle
 ) : ViewModel(), CoroutineScope {
     override val coroutineContext = viewModelScope.coroutineContext
-    private val idFicha = checkNotNull(stateHandle.get<Int>("idFicha"))
+    val idFicha = checkNotNull(stateHandle.get<Int>("idFicha"))
     val nombre = checkNotNull(stateHandle.get<String>("nombre"))
 
     private val _detailState = MutableStateFlow(MyState.Idle)
@@ -51,19 +51,19 @@ class DetailScreenVM @Inject constructor(
 
     private fun setDetail() {
         launch {
+            //emitir estado loading
+            _detailState.value = MyState.Loading
             try {
-                //emitir estado loading
-                _detailState.value = MyState.Loading
                 //obtener los detalles de la ficha y establecemos su valor en el observable
                 //evaluar response y emitir estado ok o fail
                 _urlImagen.value = retroRepoDetail.getDetail(idFicha).urlImagen
                 _descripcion.value = retroRepoDetail.getDetail(idFicha).descripcion
                 _urlsGaleria.value = retroRepoDetail.getDetail(idFicha).media.images
+                _detailState.value = MyState.Success
                 // en caso de que salte algun error, lo tratas con trycatch y emites un estado de error
             } catch (error: Throwable) {
                 _detailState.value = MyState.Failure
             }
-            _detailState.value = MyState.Success
         }
     }
 
