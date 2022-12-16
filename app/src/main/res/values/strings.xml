@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">León de cerca</string>
-    <string name="menu">Menú</string>
+    <string name="menu">León</string>
     <string name="item_favoritos">Favoritos</string>
     <string name="cardsVacio">No hay nada que mostrar</string>
     <string name="topAppBarName">León</string>

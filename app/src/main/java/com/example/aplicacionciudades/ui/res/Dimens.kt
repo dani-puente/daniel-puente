@@ -7,7 +7,6 @@ import androidx.compose.ui.unit.sp
 /**
  * Dimens de la app para el flavor actual.
  */
-val D = AplicacionCiudades
 
 interface IDimens {
     // MARGIN
@@ -25,7 +24,7 @@ interface IDimens {
     val iconNormal get() = 150.dp
 
     //TEXT
-    val titulos get() = 40.sp
+    val titulos get() = 24.sp
     val subtitulos get() = 25.sp
     val texto get() = 18.sp
 
@@ -40,4 +39,4 @@ interface IDimens {
         val paddingBetweenItems get() = 15.dp
 }
 
-object AplicacionCiudades : IDimens
+object Dimens : IDimens

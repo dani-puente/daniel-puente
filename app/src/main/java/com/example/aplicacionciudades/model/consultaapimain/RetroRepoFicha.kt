@@ -1,28 +1,20 @@
-package com.example.aplicacionciudades.model.consultaapimain
+package com.example.aplicacionciudades.model.consultaApiMain
 
-import com.example.aplicacionciudades.ui.viewmodel.ResourcesObject
+import com.example.aplicacionciudades.di.Url
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-//Json.asConverterFactory("application/json".toMediaType())
 class RetroRepoFicha @Inject constructor(private val repo: FichasRepo) {
 
     suspend fun getFichas(): List<FichaX>{
         return withContext(Dispatchers.IO){
             val response = repo.listFichas(
-                ResourcesObject.idCategoriaPadre,
-                ResourcesObject.idIdioma,
-                ResourcesObject.idProyecto
+                Url.idCategoriaPadre,
+                Url.idIdioma,
+                Url.idProyecto
             )
             response.fichas
         }
     }
-//    val retrofit by lazy {
-//        Retrofit.Builder()
-//            .addConverterFactory(GsonConverterFactory.create())
-//            .baseUrl("https://tuciudaddecerca-api.proconsi.com/")
-//            .build()
-//    }
 }
-//val fichasRepo = RetroRepoFicha.retrofit.create(FichasRepo::class.java)

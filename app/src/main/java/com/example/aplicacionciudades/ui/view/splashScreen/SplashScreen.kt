@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavController
 import com.example.aplicacionciudades.R
-import com.example.aplicacionciudades.ui.res.AplicacionCiudades
+import com.example.aplicacionciudades.ui.res.Dimens
 import kotlinx.coroutines.delay
 
 @Composable
@@ -39,7 +39,7 @@ fun Splash() {
         Image(
             painter = painterResource(id = R.mipmap.iconoleon_foreground),
             contentDescription = "Bandera de León",
-            modifier = Modifier.size(height = AplicacionCiudades.iconNormal, width = AplicacionCiudades.iconNormal)
+            modifier = Modifier.size(height = Dimens.iconNormal, width = Dimens.iconNormal)
         )
     }
 }

@@ -16,7 +16,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import coil.compose.AsyncImage
 import com.example.aplicacionciudades.R
-import com.example.aplicacionciudades.ui.res.AplicacionCiudades
+import com.example.aplicacionciudades.ui.res.Dimens
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -28,7 +28,7 @@ fun DetailItem(urlImagen: String?, descCorta: String?, urlsImagen: List<String?>
                 contentDescription = null,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(AplicacionCiudades.heightHeader)
+                    .height(Dimens.heightHeader)
             )
         }
         stickyHeader {
@@ -41,11 +41,11 @@ fun DetailItem(urlImagen: String?, descCorta: String?, urlsImagen: List<String?>
                 Text(
                     text = stringResource(R.string.descripcionCorta),
                     style = TextStyle(
-                        fontSize = AplicacionCiudades.subtitulos,
+                        fontSize = Dimens.subtitulos,
                         shadow = Shadow(
                             color = Color.Black,
-                            offset = Offset(AplicacionCiudades.offsetX, AplicacionCiudades.offsetY),
-                            blurRadius = AplicacionCiudades.blurRadius
+                            offset = Offset(Dimens.offsetX, Dimens.offsetY),
+                            blurRadius = Dimens.blurRadius
                         )
                     )
                 )
@@ -57,8 +57,8 @@ fun DetailItem(urlImagen: String?, descCorta: String?, urlsImagen: List<String?>
                     text = textDesc,
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(AplicacionCiudades.paddingBetweenItems),
-                    fontSize = AplicacionCiudades.texto,
+                        .padding(Dimens.paddingBetweenItems),
+                    fontSize = Dimens.texto,
                     textAlign = TextAlign.Justify
                 )
             }
@@ -72,11 +72,11 @@ fun DetailItem(urlImagen: String?, descCorta: String?, urlsImagen: List<String?>
                 Text(
                     text = stringResource(R.string.galeria),
                     style = TextStyle(
-                        fontSize = AplicacionCiudades.subtitulos,
+                        fontSize = Dimens.subtitulos,
                         shadow = Shadow(
                             color = Color.Black,
-                            offset = Offset(AplicacionCiudades.offsetX, AplicacionCiudades.offsetY),
-                            blurRadius = AplicacionCiudades.blurRadius
+                            offset = Offset(Dimens.offsetX, Dimens.offsetY),
+                            blurRadius = Dimens.blurRadius
                         )
                     )
                 )
@@ -102,7 +102,7 @@ private fun Imagen(urlImagen: String?) {
         alignment = Alignment.Center,
         modifier = Modifier
             .fillMaxSize()
-            .padding(AplicacionCiudades.paddingBetweenItems)
+            .padding(Dimens.paddingBetweenItems)
     )
 }
 
@@ -111,7 +111,7 @@ private fun GaleriaVacia() {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(AplicacionCiudades.heightEmptyGallery),
+            .height(Dimens.heightEmptyGallery),
         contentAlignment = Alignment.Center
     ) {
         Text(text = stringResource(R.string.galeriaVacia))

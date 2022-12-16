@@ -16,9 +16,9 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.aplicacionciudades.ui.res.Loading
-import com.example.aplicacionciudades.ui.utils.state.CState
+import com.example.aplicacionciudades.ui.utils.state.State
 import com.example.aplicacionciudades.ui.view.Error
-import com.example.aplicacionciudades.ui.viewmodel.DetailScreenVM
+import com.example.aplicacionciudades.ui.viewModel.DetailScreenVM
 
 
 
@@ -50,7 +50,7 @@ fun DetailScreen(
         },
         floatingActionButton = {
             //Mostramos el FAB si se han cargado los datos
-            if (state == CState.Success) {
+            if (state == State.Success) {
                 FloatingActionButton(onClick = {
                         onClick(esFav, vm)
                 }) {
@@ -69,10 +69,10 @@ fun DetailScreen(
         floatingActionButtonPosition = FabPosition.End,
         content = { padding ->
             when (state) {
-                CState.Idle -> Loading()
-                CState.Loading -> Loading()
-                CState.Success -> Succcess(padding, vm)
-                CState.Failure -> Error{
+                State.Idle -> Loading()
+                State.Loading -> Loading()
+                State.Success -> Succcess(padding, vm)
+                State.Failure -> Error{
                     vm.onDetailError()
                 }
             }

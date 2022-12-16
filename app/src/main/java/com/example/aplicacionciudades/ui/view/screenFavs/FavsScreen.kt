@@ -14,11 +14,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.aplicacionciudades.R
-import com.example.aplicacionciudades.model.consultaapimain.FichaX
+import com.example.aplicacionciudades.model.consultaApiMain.FichaX
 import com.example.aplicacionciudades.ui.view.detailScreen.MakeToolbarDetail
 import com.example.aplicacionciudades.ui.view.detailScreen.getDetailScreenRoute
 import com.example.aplicacionciudades.ui.view.mainScreen.cardsLugares.MakeItemPlaceList
-import com.example.aplicacionciudades.ui.viewmodel.FavsScreenVM
+import com.example.aplicacionciudades.ui.viewModel.FavsScreenVM
 
 
 @Composable
@@ -34,13 +34,13 @@ fun FavsScreen(navController: NavController, vm: FavsScreenVM = hiltViewModel())
             MakeToolbarDetail(navConttroller = navController, nombre = stringResource(R.string.favs))
         },
         content = { padding ->
-            body(padding, fichas, navController)
+            Body(padding, fichas, navController)
         }
     )
 }
 
 @Composable
-private fun body(
+private fun Body(
     padding: PaddingValues,
     fichas: List<FichaX>,
     navController: NavController

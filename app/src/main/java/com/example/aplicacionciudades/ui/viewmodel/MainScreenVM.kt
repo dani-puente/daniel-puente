@@ -1,9 +1,9 @@
-package com.example.aplicacionciudades.ui.viewmodel
+package com.example.aplicacionciudades.ui.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.aplicacionciudades.model.consultaapimain.FichaX
-import com.example.aplicacionciudades.model.consultaapimain.RetroRepoFicha
+import com.example.aplicacionciudades.model.consultaApiMain.FichaX
+import com.example.aplicacionciudades.model.consultaApiMain.RetroRepoFicha
 import com.example.aplicacionciudades.ui.utils.state.StateT
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -19,9 +19,6 @@ class MainScreenVM @Inject constructor(
     override val coroutineContext = viewModelScope.coroutineContext
     private val _detailState = MutableStateFlow< StateT<List<FichaX>>>(StateT.Idle)
     val detailState = _detailState.asStateFlow()
-
-//    private val _fichas = MutableStateFlow<List<FichaX>>(emptyList())
-//    val fichas = _fichas.asStateFlow()
 
     init {
         getFichas()

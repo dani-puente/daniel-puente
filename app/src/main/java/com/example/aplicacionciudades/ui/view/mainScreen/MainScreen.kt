@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.aplicacionciudades.R
-import com.example.aplicacionciudades.model.consultaapimain.FichaX
+import com.example.aplicacionciudades.model.consultaApiMain.FichaX
 import com.example.aplicacionciudades.ui.res.Loading
 import com.example.aplicacionciudades.ui.utils.state.StateT
 import com.example.aplicacionciudades.ui.view.Error
@@ -18,7 +18,7 @@ import com.example.aplicacionciudades.ui.view.detailScreen.getDetailScreenRoute
 import com.example.aplicacionciudades.ui.view.mainScreen.cardsLugares.MakeItemPlaceList
 import com.example.aplicacionciudades.ui.view.mainScreen.drawer.MakeDrawerView
 import com.example.aplicacionciudades.ui.view.mainScreen.toolbar.MakeToolbarMain
-import com.example.aplicacionciudades.ui.viewmodel.MainScreenVM
+import com.example.aplicacionciudades.ui.viewModel.MainScreenVM
 import kotlinx.coroutines.launch
 
 @Composable
@@ -54,17 +54,6 @@ fun MainScreen(navController: NavController, vm: MainScreenVM = hiltViewModel())
     )
 }
 
-
-@Composable
-fun Success(navController: NavController, padding: PaddingValues, fichas: List<FichaX>) {
-    Column(modifier = Modifier.padding(padding)) {
-        //metodo que dibuja los lugares
-        MakeItemPlaceList(listaLugares = fichas) {
-            navController.navigate(getDetailScreenRoute(it.idFicha, it.nombre))
-        }
-    }
-}
-
 @Composable
 fun Body(
     navController: NavController,
@@ -85,3 +74,14 @@ fun Body(
         }
     }
 }
+
+@Composable
+fun Success(navController: NavController, padding: PaddingValues, fichas: List<FichaX>) {
+    Column(modifier = Modifier.padding(padding)) {
+        //metodo que dibuja los lugares
+        MakeItemPlaceList(listaLugares = fichas) {
+            navController.navigate(getDetailScreenRoute(it.idFicha, it.nombre))
+        }
+    }
+}
+

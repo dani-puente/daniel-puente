@@ -15,8 +15,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.example.aplicacionciudades.R
-import com.example.aplicacionciudades.model.consultaapimain.FichaX
-import com.example.aplicacionciudades.ui.res.AplicacionCiudades
+import com.example.aplicacionciudades.model.consultaApiMain.FichaX
+import com.example.aplicacionciudades.ui.res.Dimens
 
 @Composable
 fun MakeItemPlaceList(
@@ -27,7 +27,7 @@ fun MakeItemPlaceList(
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
-            .padding(AplicacionCiudades.paddingCards)
+            .padding(Dimens.paddingCards)
     ) {
         //Indicamos, el numero de items que vamos a poner en el LazyColumn, en nuestro caso va a depender de la lista que nos pase la API
         items(listaLugares.size) {

@@ -1,10 +1,10 @@
-package com.example.aplicacionciudades.ui.viewmodel
+package com.example.aplicacionciudades.ui.viewModel
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.aplicacionciudades.model.consultaapimain.FichaX
-import com.example.aplicacionciudades.model.consultaapimain.RetroRepoFicha
+import com.example.aplicacionciudades.model.consultaApiMain.FichaX
+import com.example.aplicacionciudades.model.consultaApiMain.RetroRepoFicha
 import com.example.aplicacionciudades.model.database.dao.FavDao
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope

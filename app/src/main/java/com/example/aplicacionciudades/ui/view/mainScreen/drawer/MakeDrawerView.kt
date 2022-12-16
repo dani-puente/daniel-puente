@@ -1,5 +1,6 @@
 package com.example.aplicacionciudades.ui.view.mainScreen.drawer
 
+import androidx.compose.material.Divider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
@@ -11,6 +12,7 @@ import com.example.aplicacionciudades.R
 fun MakeDrawerView(icono: Int, navController: NavController) {
     //Con este metodo creamos la cabecera del DrawerView
     DrawerHeader()
+    Divider()
     //Creamos el cuerpo del DrawerView
     DrawerBody(
         //indicamos con items = los items que va a tener el menu, MenuItem es una dataClass, modelo que seguirian todos los items si se

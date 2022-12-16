@@ -1,7 +1,7 @@
 package com.example.aplicacionciudades.di
 
-import com.example.aplicacionciudades.model.consultaapidetail.DetailRepo
-import com.example.aplicacionciudades.model.consultaapimain.FichasRepo
+import com.example.aplicacionciudades.model.consultaApiDetail.DetailRepo
+import com.example.aplicacionciudades.model.consultaApiMain.FichasRepo
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,7 +20,7 @@ object NetworkModule {
     fun provideRetrofit(gsonConverterFactory: GsonConverterFactory): Retrofit {
         return Retrofit.Builder()
             .addConverterFactory(gsonConverterFactory)
-            .baseUrl("https://tuciudaddecerca-api.proconsi.com")
+            .baseUrl(Url.urlBase)
             .build()
     }
 

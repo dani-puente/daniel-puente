@@ -1,116 +1,87 @@
 package com.example.aplicacionciudades.ui.utils.state
 
+
 import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.contract
-import com.example.aplicacionciudades.ui.utils.state.ext.hasData as extHasData
-import com.example.aplicacionciudades.ui.utils.state.ext.hasErrors as extHasErrors
-sealed class CState {
-    object Idle : CState(), IIdle
-    object Loading : CState(), ILoading
-    object Success : CState(), ISuccess
-    object Failure : CState(), IFailure
-
-    fun isIdle() = this is Idle
-    fun isLoading() = this is Loading
-    fun isSuccess() = this is Success
-    fun isFailure() = this is Failure
+sealed class State : IState {
+    object Idle : State(), IIdle
+    object Loading : State(), ILoading
+    object Success : State(), ISuccess
+    object Failure : State(), IFailure
 }
-
-sealed class StateT<out T> {
+sealed class StateT<out T> : IStateT<T> {
     object Idle : StateT<Nothing>(), IIdle
     object Loading : StateT<Nothing>(), ILoading
     data class Success<T>(override val data: T) : StateT<T>(), ISuccessWithData<T>
     object Failure : StateT<Nothing>(), IFailure
-
-    fun isIdle() = this is Idle
-    fun isLoading() = this is Loading
-    fun isFailure() = this is Failure
-
     @OptIn(ExperimentalContracts::class)
-    fun isSuccess(): Boolean {
+    fun isSuccessX(): Boolean {
         contract {
             returns(true) implies (this@StateT is Success)
         }
         return this is Success
     }
-
     @OptIn(ExperimentalContracts::class)
-    fun hasData(): Boolean {
+    fun hasDataX(): Boolean {
         contract {
             returns(true) implies (this@StateT is Success)
         }
-        return this is Success && extHasData()
+        return this is Success && hasData()
     }
 }
-
-sealed class StateE<out E> {
+sealed class StateE<out E> : IStateE<E> {
     object Idle : StateE<Nothing>(), IIdle
     object Loading : StateE<Nothing>(), ILoading
     object Success : StateE<Nothing>(), ISuccess
     data class Failure<E>(override val error: E) : StateE<E>(), IFailureWithError<E>
-
-    fun isIdle() = this is Idle
-    fun isLoading() = this is Loading
-    fun isSuccess() = this is Success
-
     @OptIn(ExperimentalContracts::class)
-    fun isFailure(): Boolean {
+    fun isFailureX(): Boolean {
         contract {
             returns(true) implies (this@StateE is Failure)
         }
         return this is Failure
     }
-
     @OptIn(ExperimentalContracts::class)
-    fun hasErrors(): Boolean {
+    fun hasErrorsX(): Boolean {
         contract {
             returns(true) implies (this@StateE is Failure)
         }
-        return this is Failure && extHasErrors()
+        return this is Failure && hasErrors()
     }
 }
-
-sealed class StateTE<out T, out E> {
+sealed class StateTE<out T, out E> : IStateTE<T, E> {
     object Idle : StateTE<Nothing, Nothing>(), IIdle
     object Loading : StateTE<Nothing, Nothing>(), ILoading
     data class Success<T>(override val data: T) : StateTE<T, Nothing>(),
         ISuccessWithData<T>
-
     data class Failure<E>(override val error: E) : StateTE<Nothing, E>(),
         IFailureWithError<E>
-
-    fun isIdle() = this is StateTE.Idle
-    fun isLoading() = this is StateTE.Loading
-
     @OptIn(ExperimentalContracts::class)
-    fun isSuccess(): Boolean {
+    fun isSuccessX(): Boolean {
         contract {
             returns(true) implies (this@StateTE is Success)
         }
         return this is Success
     }
-
     @OptIn(ExperimentalContracts::class)
-    fun isFailure(): Boolean {
+    fun hasDataX(): Boolean {
+        contract {
+            returns(true) implies (this@StateTE is Success)
+        }
+        return this is Success && hasData()
+    }
+    @OptIn(ExperimentalContracts::class)
+    fun isFailureX(): Boolean {
         contract {
             returns(true) implies (this@StateTE is Failure)
         }
         return this is Failure
     }
-
     @OptIn(ExperimentalContracts::class)
-    fun hasErrors(): Boolean {
+    fun hasErrorsX(): Boolean {
         contract {
             returns(true) implies (this@StateTE is Failure)
         }
-        return this is Failure && extHasErrors()
-    }
-
-    @OptIn(ExperimentalContracts::class)
-    fun hasData(): Boolean {
-        contract {
-            returns(true) implies (this@StateTE is Success)
-        }
-        return this is Success && extHasData()
+        return this is Failure && hasErrors()
     }
 }

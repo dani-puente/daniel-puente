@@ -12,16 +12,16 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.example.aplicacionciudades.model.consultaapimain.FichaX
-import com.example.aplicacionciudades.ui.res.AplicacionCiudades
+import com.example.aplicacionciudades.model.consultaApiMain.FichaX
+import com.example.aplicacionciudades.ui.res.Dimens
 
 @Composable
 fun ItemPlace(lugar: FichaX, modifier: Modifier = Modifier) {
     Card(
         modifier = modifier
             .fillMaxSize()
-            .padding(AplicacionCiudades.paddingCards),
-        elevation = AplicacionCiudades.elevation,
+            .padding(Dimens.paddingCards),
+        elevation = Dimens.elevation,
 
         ) {
         Column {
@@ -37,7 +37,7 @@ fun ItemPlace(lugar: FichaX, modifier: Modifier = Modifier) {
                 fontStyle = FontStyle.Italic,
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(top = AplicacionCiudades.textTop, bottom = AplicacionCiudades.textBottom),
+                    .padding(top = Dimens.textTop, bottom = Dimens.textBottom),
                 textAlign = TextAlign.Center,
             )
         }
