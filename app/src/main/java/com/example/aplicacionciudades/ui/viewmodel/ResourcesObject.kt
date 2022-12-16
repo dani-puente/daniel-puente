@@ -1,4 +1,4 @@
-package com.example.aplicacionciudades.viewmodel
+package com.example.aplicacionciudades.ui.viewmodel
 
 object ResourcesObject {
     val idCategoriaPadre = 30

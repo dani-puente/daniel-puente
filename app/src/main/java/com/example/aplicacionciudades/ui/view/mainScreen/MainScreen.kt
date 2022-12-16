@@ -1,24 +1,24 @@
-package com.example.aplicacionciudades.view.mainScreen
+package com.example.aplicacionciudades.ui.view.mainScreen
 
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Warning
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Scaffold
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.aplicacionciudades.R
 import com.example.aplicacionciudades.model.consultaapimain.FichaX
-import com.example.aplicacionciudades.view.detailScreen.getDetailScreenRoute
-import com.example.aplicacionciudades.view.mainScreen.cardsLugares.MakeItemPlaceList
-import com.example.aplicacionciudades.view.mainScreen.drawer.MakeDrawerView
-import com.example.aplicacionciudades.view.mainScreen.toolbar.MakeToolbarMain
-import com.example.aplicacionciudades.view.res.Loading
-import com.example.aplicacionciudades.viewmodel.MainScreenVM
-import com.example.aplicacionciudades.viewmodel.MyState
+import com.example.aplicacionciudades.ui.res.Loading
+import com.example.aplicacionciudades.ui.utils.state.StateT
+import com.example.aplicacionciudades.ui.view.Error
+import com.example.aplicacionciudades.ui.view.detailScreen.getDetailScreenRoute
+import com.example.aplicacionciudades.ui.view.mainScreen.cardsLugares.MakeItemPlaceList
+import com.example.aplicacionciudades.ui.view.mainScreen.drawer.MakeDrawerView
+import com.example.aplicacionciudades.ui.view.mainScreen.toolbar.MakeToolbarMain
+import com.example.aplicacionciudades.ui.viewmodel.MainScreenVM
 import kotlinx.coroutines.launch
 
 @Composable
@@ -28,14 +28,9 @@ fun MainScreen(navController: NavController, vm: MainScreenVM = hiltViewModel())
     //Guarda el ambito de la corrrutina
     val scope = rememberCoroutineScope()
     val icono = R.drawable.ic_favorito_lleno
-    val fichasState = vm.fichas.collectAsState()
-    //Esta escuchando fichasState se repintara en caso de que fichas cambie
-    val fichas by remember {
-        fichasState
-    }
-    val detailState = vm.detailState.collectAsState()
+    val fichasState = vm.detailState.collectAsState()
     val state by remember {
-        detailState
+        fichasState
     }
     Scaffold(
         scaffoldState = scaffoldState,
@@ -53,38 +48,12 @@ fun MainScreen(navController: NavController, vm: MainScreenVM = hiltViewModel())
         },
         //Indicamos que contenido a va tener el Scaffold, es conveniente pasar el padding, por compatibilidad en distintos dispositivos
         content = { padding ->
-            when (state) {
-                MyState.Idle -> Loading()
-                MyState.Loading -> Loading()
-                MyState.Success -> Success(
-                    navController = navController,
-                    padding = padding,
-                    fichas = fichas
-                )
-                MyState.Failure -> Error(
-                    navController = navController
-                )
-            }
+            Body(navController = navController, vm = vm, padding = padding, state = state)
+
         }
     )
 }
 
-@Composable
-fun Error(navController: NavController) {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Icon(Icons.Filled.Warning, contentDescription = null)
-        TextButton(
-            onClick = { navController.navigate("main") }
-        ) {
-            Text(text = stringResource(R.string.boton))
-        }
-
-    }
-}
 
 @Composable
 fun Success(navController: NavController, padding: PaddingValues, fichas: List<FichaX>) {
@@ -92,6 +61,27 @@ fun Success(navController: NavController, padding: PaddingValues, fichas: List<F
         //metodo que dibuja los lugares
         MakeItemPlaceList(listaLugares = fichas) {
             navController.navigate(getDetailScreenRoute(it.idFicha, it.nombre))
+        }
+    }
+}
+
+@Composable
+fun Body(
+    navController: NavController,
+    vm: MainScreenVM,
+    padding: PaddingValues,
+    state: StateT<List<FichaX>>
+) {
+    when (state) {
+        StateT.Idle -> Loading()
+        StateT.Loading -> Loading()
+        is StateT.Success-> Success(
+            navController = navController,
+            padding = padding,
+            fichas = state.data
+        )
+        is StateT.Failure -> Error {
+            vm.onFichasError()
         }
     }
 }

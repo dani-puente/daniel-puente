@@ -1,4 +1,4 @@
-package com.example.aplicacionciudades.view.detailScreen
+package com.example.aplicacionciudades.ui.view.detailScreen
 
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -17,7 +17,7 @@ fun MakeToolbarDetail(navConttroller: NavController, nombre: String?) {
             IconButton(onClick = { navConttroller.navigate("main") }) {
                 Icon(
                     imageVector = Icons.Default.ArrowBack,
-                    contentDescription = "Botón atrás"
+                    contentDescription = null
                 )
             }
         }

@@ -1,4 +1,4 @@
-package com.example.aplicacionciudades.view.mainScreen.cardsLugares
+package com.example.aplicacionciudades.ui.view.mainScreen.cardsLugares
 
 data class Place(
     val urlImagen: String,

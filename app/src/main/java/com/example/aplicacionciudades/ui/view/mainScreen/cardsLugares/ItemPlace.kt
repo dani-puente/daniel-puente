@@ -1,4 +1,4 @@
-package com.example.aplicacionciudades.view.mainScreen.cardsLugares
+package com.example.aplicacionciudades.ui.view.mainScreen.cardsLugares
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,7 +13,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.aplicacionciudades.model.consultaapimain.FichaX
-import com.example.aplicacionciudades.view.res.AplicacionCiudades
+import com.example.aplicacionciudades.ui.res.AplicacionCiudades
 
 @Composable
 fun ItemPlace(lugar: FichaX, modifier: Modifier = Modifier) {

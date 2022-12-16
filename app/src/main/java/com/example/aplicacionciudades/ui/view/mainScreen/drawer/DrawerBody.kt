@@ -1,4 +1,4 @@
-package com.example.aplicacionciudades.view.mainScreen.drawer
+package com.example.aplicacionciudades.ui.view.mainScreen.drawer
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -9,7 +9,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.aplicacionciudades.view.res.AplicacionCiudades
+import com.example.aplicacionciudades.ui.res.AplicacionCiudades
 
 @Composable
 fun DrawerBody(

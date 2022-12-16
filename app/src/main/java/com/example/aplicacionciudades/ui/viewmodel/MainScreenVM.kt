@@ -1,9 +1,10 @@
-package com.example.aplicacionciudades.viewmodel
+package com.example.aplicacionciudades.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.aplicacionciudades.model.consultaapimain.FichaX
 import com.example.aplicacionciudades.model.consultaapimain.RetroRepoFicha
+import com.example.aplicacionciudades.ui.utils.state.StateT
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,27 +17,29 @@ class MainScreenVM @Inject constructor(
     private val retroRepoFicha: RetroRepoFicha
 ) : ViewModel(), CoroutineScope {
     override val coroutineContext = viewModelScope.coroutineContext
-    private val _detailState = MutableStateFlow(MyState.Idle)
+    private val _detailState = MutableStateFlow< StateT<List<FichaX>>>(StateT.Idle)
     val detailState = _detailState.asStateFlow()
 
-    private val _fichas = MutableStateFlow<List<FichaX>>(emptyList())
-    val fichas = _fichas.asStateFlow()
+//    private val _fichas = MutableStateFlow<List<FichaX>>(emptyList())
+//    val fichas = _fichas.asStateFlow()
 
     init {
-        setMain()
+        getFichas()
     }
 
-    private fun setMain() {
+    private fun getFichas() {
         launch {
-            _detailState.value = MyState.Loading
+            _detailState.value = StateT.Loading
             try {
-                _fichas.value = retroRepoFicha.getFichas()
-                _detailState.value = MyState.Success
+                val response = retroRepoFicha.getFichas()
+                _detailState.value = StateT.Success(response)
             } catch (error: Throwable) {
-                _detailState.value = MyState.Failure
+                _detailState.value = StateT.Failure
             }
         }
     }
+
+    fun onFichasError() = getFichas()
 }
 
 

@@ -2,13 +2,13 @@ package com.example.aplicacionciudades.ui.utils.state
 
 import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.contract
-import com.example.aplicacionciudades.ui.utils.state.StateExt.hasData as extHasData
-import com.example.aplicacionciudades.ui.utils.state.StateExt.hasErrors as extHasErro
-sealed class State {
-    object Idle : State(), IIdle
-    object Loading : State(), ILoading
-    object Success : State(), ISuccess
-    object Failure : State(), IFailure
+import com.example.aplicacionciudades.ui.utils.state.ext.hasData as extHasData
+import com.example.aplicacionciudades.ui.utils.state.ext.hasErrors as extHasErrors
+sealed class CState {
+    object Idle : CState(), IIdle
+    object Loading : CState(), ILoading
+    object Success : CState(), ISuccess
+    object Failure : CState(), IFailure
 
     fun isIdle() = this is Idle
     fun isLoading() = this is Loading

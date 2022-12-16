@@ -1,25 +1,25 @@
-package com.example.aplicacionciudades.view.detailScreen
+package com.example.aplicacionciudades.ui.view.detailScreen
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
-import androidx.compose.material.icons.filled.Warning
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.example.aplicacionciudades.R
-import com.example.aplicacionciudades.view.res.Loading
-import com.example.aplicacionciudades.viewmodel.DetailScreenVM
-import com.example.aplicacionciudades.viewmodel.MyState
+import com.example.aplicacionciudades.ui.res.Loading
+import com.example.aplicacionciudades.ui.utils.state.CState
+import com.example.aplicacionciudades.ui.view.Error
+import com.example.aplicacionciudades.ui.viewmodel.DetailScreenVM
+
 
 
 fun getDetailScreenRoute(idFicha: Int, nombre: String): String {
@@ -50,7 +50,7 @@ fun DetailScreen(
         },
         floatingActionButton = {
             //Mostramos el FAB si se han cargado los datos
-            if (state == MyState.Success) {
+            if (state == CState.Success) {
                 FloatingActionButton(onClick = {
                         onClick(esFav, vm)
                 }) {
@@ -69,13 +69,12 @@ fun DetailScreen(
         floatingActionButtonPosition = FabPosition.End,
         content = { padding ->
             when (state) {
-                MyState.Idle -> Loading()
-                MyState.Loading -> Loading()
-                MyState.Success -> Succcess(padding, vm)
-                MyState.Failure -> Error(
-                    navController = navController,
-                    vm = vm
-                )
+                CState.Idle -> Loading()
+                CState.Loading -> Loading()
+                CState.Success -> Succcess(padding, vm)
+                CState.Failure -> Error{
+                    vm.onDetailError()
+                }
             }
         },
     )
@@ -109,22 +108,6 @@ fun Succcess(padding: PaddingValues, vm: DetailScreenVM) {
             descripcion,
             media
         )
-    }
-}
-
-@Composable
-fun Error(navController: NavController, vm: DetailScreenVM) {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Icon(Icons.Filled.Warning, contentDescription = null)
-        TextButton(
-            onClick = { navController.navigate(getDetailScreenRoute(vm.idFicha, vm.nombre)) }
-        ) {
-            Text(text = stringResource(R.string.boton))
-        }
     }
 }
 

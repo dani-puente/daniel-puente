@@ -1,6 +1,6 @@
 package com.example.aplicacionciudades.model.consultaapidetail
 
-import com.example.aplicacionciudades.viewmodel.ResourcesObject
+import com.example.aplicacionciudades.ui.viewmodel.ResourcesObject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject

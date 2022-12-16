@@ -1,4 +1,4 @@
-package com.example.aplicacionciudades.view.detailScreen
+package com.example.aplicacionciudades.ui.view.detailScreen
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
@@ -16,7 +16,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import coil.compose.AsyncImage
 import com.example.aplicacionciudades.R
-import com.example.aplicacionciudades.view.res.AplicacionCiudades
+import com.example.aplicacionciudades.ui.res.AplicacionCiudades
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable

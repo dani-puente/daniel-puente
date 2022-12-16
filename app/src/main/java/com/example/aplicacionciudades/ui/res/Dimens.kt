@@ -1,4 +1,4 @@
-package com.example.aplicacionciudades.view.res
+package com.example.aplicacionciudades.ui.res
 
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp

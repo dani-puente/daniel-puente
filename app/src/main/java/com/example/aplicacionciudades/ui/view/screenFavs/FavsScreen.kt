@@ -1,6 +1,7 @@
-package com.example.aplicacionciudades.view.screenFavs
+package com.example.aplicacionciudades.ui.view.screenFavs
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
@@ -13,10 +14,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.aplicacionciudades.R
-import com.example.aplicacionciudades.view.detailScreen.MakeToolbarDetail
-import com.example.aplicacionciudades.view.detailScreen.getDetailScreenRoute
-import com.example.aplicacionciudades.view.mainScreen.cardsLugares.MakeItemPlaceList
-import com.example.aplicacionciudades.viewmodel.FavsScreenVM
+import com.example.aplicacionciudades.model.consultaapimain.FichaX
+import com.example.aplicacionciudades.ui.view.detailScreen.MakeToolbarDetail
+import com.example.aplicacionciudades.ui.view.detailScreen.getDetailScreenRoute
+import com.example.aplicacionciudades.ui.view.mainScreen.cardsLugares.MakeItemPlaceList
+import com.example.aplicacionciudades.ui.viewmodel.FavsScreenVM
 
 
 @Composable
@@ -32,11 +34,20 @@ fun FavsScreen(navController: NavController, vm: FavsScreenVM = hiltViewModel())
             MakeToolbarDetail(navConttroller = navController, nombre = stringResource(R.string.favs))
         },
         content = { padding ->
-            Column(modifier = Modifier.padding(padding)) {
-                MakeItemPlaceList(listaLugares = fichas) {
-                    navController.navigate(getDetailScreenRoute(it.idFicha, it.nombre))
-                }
-            }
+            body(padding, fichas, navController)
         }
     )
+}
+
+@Composable
+private fun body(
+    padding: PaddingValues,
+    fichas: List<FichaX>,
+    navController: NavController
+) {
+    Column(modifier = Modifier.padding(padding)) {
+        MakeItemPlaceList(listaLugares = fichas) {
+            navController.navigate(getDetailScreenRoute(it.idFicha, it.nombre))
+        }
+    }
 }

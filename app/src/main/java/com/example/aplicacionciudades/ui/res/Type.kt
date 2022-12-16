@@ -1,4 +1,4 @@
-package com.example.aplicacionciudades.ui.theme
+package com.example.aplicacionciudades.ui.res
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
