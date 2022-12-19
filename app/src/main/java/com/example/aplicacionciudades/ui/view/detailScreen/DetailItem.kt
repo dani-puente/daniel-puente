@@ -41,7 +41,7 @@ fun DetailItem(urlImagen: String?, descCorta: String?, urlsImagen: List<String?>
                 Text(
                     text = stringResource(R.string.descripcionCorta),
                     style = TextStyle(
-                        fontSize = Dimens.subtitulos,
+                        fontSize = Dimens.titulo2,
                         shadow = Shadow(
                             color = Color.Black,
                             offset = Offset(Dimens.offsetX, Dimens.offsetY),
@@ -72,7 +72,7 @@ fun DetailItem(urlImagen: String?, descCorta: String?, urlsImagen: List<String?>
                 Text(
                     text = stringResource(R.string.galeria),
                     style = TextStyle(
-                        fontSize = Dimens.subtitulos,
+                        fontSize = Dimens.titulo2,
                         shadow = Shadow(
                             color = Color.Black,
                             offset = Offset(Dimens.offsetX, Dimens.offsetY),

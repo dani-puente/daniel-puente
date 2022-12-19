@@ -29,7 +29,7 @@ fun ItemPlace(lugar: FichaX, modifier: Modifier = Modifier) {
                 model = lugar.urlImagen,
                 modifier = Modifier.fillMaxSize(),
                 contentDescription = null,
-                contentScale = ContentScale.Crop,
+                contentScale = ContentScale.Crop
             )
             Text(
                 text = lugar.nombre,
@@ -38,7 +38,7 @@ fun ItemPlace(lugar: FichaX, modifier: Modifier = Modifier) {
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(top = Dimens.textTop, bottom = Dimens.textBottom),
-                textAlign = TextAlign.Center,
+                textAlign = TextAlign.Center
             )
         }
     }

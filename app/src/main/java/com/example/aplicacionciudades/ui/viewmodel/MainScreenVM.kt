@@ -17,8 +17,10 @@ class MainScreenVM @Inject constructor(
     private val retroRepoFicha: RetroRepoFicha
 ) : ViewModel(), CoroutineScope {
     override val coroutineContext = viewModelScope.coroutineContext
+
     private val _detailState = MutableStateFlow< StateT<List<FichaX>>>(StateT.Idle)
     val detailState = _detailState.asStateFlow()
+
 
     init {
         getFichas()

@@ -21,7 +21,6 @@ import com.example.aplicacionciudades.ui.view.Error
 import com.example.aplicacionciudades.ui.viewModel.DetailScreenVM
 
 
-
 fun getDetailScreenRoute(idFicha: Int, nombre: String): String {
 
     return "detail/$idFicha" +
@@ -36,12 +35,8 @@ fun DetailScreen(
     val scaffoldState = rememberScaffoldState()
     val detailState = vm.detailState.collectAsState()
     val esFavState = vm.esFav.collectAsState()
-    val state by remember {
-        detailState
-    }
-    val esFav by rememberSaveable {
-        esFavState
-    }
+    val state by remember { detailState }
+    val esFav by rememberSaveable { esFavState }
 
     Scaffold(
         scaffoldState = scaffoldState,
@@ -52,7 +47,7 @@ fun DetailScreen(
             //Mostramos el FAB si se han cargado los datos
             if (state == State.Success) {
                 FloatingActionButton(onClick = {
-                        onClick(esFav, vm)
+                    onClick(esFav, vm)
                 }) {
                     Icon(
                         imageVector =
@@ -72,7 +67,7 @@ fun DetailScreen(
                 State.Idle -> Loading()
                 State.Loading -> Loading()
                 State.Success -> Succcess(padding, vm)
-                State.Failure -> Error{
+                State.Failure -> Error {
                     vm.onDetailError()
                 }
             }
@@ -91,17 +86,11 @@ fun onClick(esFav: Boolean, vm: DetailScreenVM) {
 @Composable
 fun Succcess(padding: PaddingValues, vm: DetailScreenVM) {
     val urlState = vm.urlImagen.collectAsState()
-    val url by remember {
-        urlState
-    }
+    val url by remember { urlState }
     val descripcionState = vm.descripcion.collectAsState()
-    val descripcion by remember {
-        descripcionState
-    }
+    val descripcion by remember { descripcionState }
     val mediaState = vm.urlsGaleria.collectAsState()
-    val media by remember {
-        mediaState
-    }
+    val media by remember { mediaState }
     Column(modifier = Modifier.padding(padding)) {
         DetailItem(
             url,
