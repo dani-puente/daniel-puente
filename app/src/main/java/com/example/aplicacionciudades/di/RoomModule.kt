@@ -15,12 +15,12 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object RoomModule {
     //Nombre de la base de datos
-    private const val QUOTE_DATABASE_NAME = "favoritos_db"
+    private const val DATABASE_NAME = "favoritos_db"
 
     @Singleton
     @Provides
     fun provideRoom(@ApplicationContext context: Context): FavoritosDB {
-        return Room.databaseBuilder(context, FavoritosDB::class.java, QUOTE_DATABASE_NAME).build()
+        return Room.databaseBuilder(context, FavoritosDB::class.java, DATABASE_NAME).build()
     }
 
     @Singleton
@@ -29,9 +29,4 @@ object RoomModule {
         return db.getFavDao()
     }
 
-//    @Singleton
-//    @Provides
-//    fun provideFavEntity(idFicha: Int): FavEntity{
-//        return FavEntity(idFicha)
-//    }
 }

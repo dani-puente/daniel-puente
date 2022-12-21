@@ -1,3 +1,26 @@
 <resources>
-    <string name="app_name">AplicacionCiudades</string>
+    <!--GeneralStrings-->
+    <string name="app_name">León de cerca</string>
+    <!--Error-->
+    <string name="boton">Reintentar</string>
+    <string name="errorCarga">Error al cargar los datos</string>
+
+    <!--TopAppBar-->
+    <string name="topAppBarName">León</string>
+
+    <!--DrawerView-->
+    <string name="menu">León</string>
+    <string name="item_favoritos">Favoritos</string>
+
+    <!--MainScreen-->
+    <string name="cardsVacio">No hay nada que mostrar</string>
+
+    <!--DetailScreen-->
+    <string name="descripcionCorta">Descripción corta</string>
+    <string name="galeria">Galería</string>
+    <string name="galeriaVacia">La galería esta vacia :(</string>
+
+    <!--DetailScreen-->
+    <string name="favs">Favoritos</string>
+
 </resources>

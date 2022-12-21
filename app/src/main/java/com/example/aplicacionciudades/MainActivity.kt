@@ -13,11 +13,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.aplicacionciudades.ui.theme.AplicacionCiudadesTheme
-import com.example.aplicacionciudades.view.detailScreen.DetailScreen
-import com.example.aplicacionciudades.view.mainScreen.MainScreen
-import com.example.aplicacionciudades.view.screenFavs.FavsScreen
-import com.example.aplicacionciudades.view.splashScreen.SplashScreen
+import com.example.aplicacionciudades.ui.res.AplicacionCiudadesTheme
+import com.example.aplicacionciudades.ui.view.detailScreen.DetailScreen
+import com.example.aplicacionciudades.ui.view.favsScreen.FavsScreen
+import com.example.aplicacionciudades.ui.view.mainScreen.MainScreen
+import com.example.aplicacionciudades.ui.view.splashScreen.SplashScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

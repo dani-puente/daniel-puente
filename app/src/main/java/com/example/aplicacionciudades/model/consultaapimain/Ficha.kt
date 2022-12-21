@@ -1,4 +1,4 @@
-package com.example.aplicacionciudades.model.consultaapimain
+package com.example.aplicacionciudades.model.consultaApiMain
 
 data class Ficha(
     val categorias: List<Any>,
