@@ -1,4 +1,4 @@
-package com.example.aplicacionciudades.model.consultaapimain
+package com.example.aplicacionciudades.model.consultaApiMain
 
 data class FichaX(
     val descripcionCorta: String,

@@ -1,8 +1,8 @@
-package com.example.aplicacionciudades.model.consultaapidetail
+package com.example.aplicacionciudades.model.consultaApiDetail
 
 data class Media(
     val audios: List<String>,
     val images: List<String>,
-    val links: List<Any>,
+    val links: List<String>,
     val videos: List<String>
 )

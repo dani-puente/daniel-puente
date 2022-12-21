@@ -1,8 +1,8 @@
-package com.example.aplicacionciudades.model.consultaapidetail
+package com.example.aplicacionciudades.model.consultaApiDetail
 
 data class MediaX(
     val audios: List<String>,
-    val images: List<Any>,
-    val links: List<Any>,
-    val videos: List<Any>
+    val images: List<String>,
+    val links: List<String>,
+    val videos: List<String>
 )

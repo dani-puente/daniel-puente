@@ -1,4 +1,4 @@
-package com.example.aplicacionciudades.model.consultaapimain
+package com.example.aplicacionciudades.model.consultaApiMain
 
 import retrofit2.http.GET
 import retrofit2.http.Query

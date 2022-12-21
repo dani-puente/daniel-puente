@@ -1,4 +1,4 @@
-package com.example.aplicacionciudades.model.consultaapidetail
+package com.example.aplicacionciudades.model.consultaApiDetail
 
 data class Ruta(
     val descripcion: String,

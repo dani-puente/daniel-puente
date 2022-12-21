@@ -1,6 +1,6 @@
-package com.example.aplicacionciudades.model.consultaapidetail
+package com.example.aplicacionciudades.model.consultaApiDetail
 
-import com.example.aplicacionciudades.viewmodel.ResourcesObject
+import com.example.aplicacionciudades.di.Url
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -11,19 +11,11 @@ class RetroRepoDetail @Inject constructor(private val repo: DetailRepo) {
         return withContext(Dispatchers.IO) {
             val response = repo.getDetail(
                 idFicha,
-                ResourcesObject.tipoFicha,
-                ResourcesObject.idIdioma,
-                ResourcesObject.idProyecto
+                Url.tipoFicha,
+                Url.idIdioma,
+                Url.idProyecto
             )
             response
         }
     }
-//    val retrofit by lazy {
-//        Retrofit.Builder()
-//            .addConverterFactory(GsonConverterFactory.create())
-//            .baseUrl("https://tuciudaddecerca-api.proconsi.com")
-//            .build()
-//    }
 }
-
-//val detailRepo = RetroRepoDetail.retrofit.create(DetailRepo::class.java)

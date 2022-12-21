@@ -1,15 +1,15 @@
-package com.example.aplicacionciudades.model.consultaapidetail
+package com.example.aplicacionciudades.model.consultaApiDetail
 
 data class Detail(
     val descripcion: String,
     val descripcionCorta: String,
     val direccion: String,
     val email: String,
-    val fechaFin: Any,
-    val fechaInicio: Any,
-    val horaFin: Any,
-    val horaInicio: Any,
-    val idDetalle: Any,
+    val fechaFin: String,
+    val fechaInicio: String,
+    val horaFin: String,
+    val horaInicio: String,
+    val idDetalle: String,
     val idFicha: Int,
     val idIdioma: Int,
     val idImagen: Int,
