@@ -1,4 +1,4 @@
-package com.example.aplicacionciudades.ui.view.mainScreen.toolbar
+package com.example.aplicacionciudades.ui.view.mainScreen.items.toolbar
 
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton

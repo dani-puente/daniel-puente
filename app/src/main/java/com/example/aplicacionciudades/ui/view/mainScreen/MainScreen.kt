@@ -12,8 +12,8 @@ import com.example.aplicacionciudades.ui.res.Loading
 import com.example.aplicacionciudades.ui.utils.state.StateT
 import com.example.aplicacionciudades.ui.view.Error
 import com.example.aplicacionciudades.ui.view.Success
-import com.example.aplicacionciudades.ui.view.mainScreen.drawer.MakeDrawerView
-import com.example.aplicacionciudades.ui.view.mainScreen.toolbar.MakeToolbarMain
+import com.example.aplicacionciudades.ui.view.mainScreen.items.drawer.MakeDrawerView
+import com.example.aplicacionciudades.ui.view.mainScreen.items.toolbar.MakeToolbarMain
 import com.example.aplicacionciudades.ui.viewModel.MainScreenVM
 import kotlinx.coroutines.launch
 
@@ -38,7 +38,7 @@ fun MainScreen(navController: NavController, vm: MainScreenVM = hiltViewModel())
         //Aqui metemos el contenido del DrawerView
         drawerContent = {
             //Creamos el DrawerView
-            MakeDrawerView(icono = icono, navController)
+            MakeDrawerView(icono = icono, navController = navController)
         },
         //Indicamos que contenido a va tener el Scaffold, es conveniente pasar el padding, por compatibilidad en distintos dispositivos
         content = { padding ->

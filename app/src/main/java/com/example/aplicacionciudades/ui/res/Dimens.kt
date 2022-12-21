@@ -13,11 +13,18 @@ interface IDimens {
     val heightHeader get() = 270.dp
     val heightEmptyGallery get() = 400.dp
 
+    //LAZYCOLUMN
+    val gridAdaptive get() = 200.dp
     //CARDS
     val paddingCards get() = 10.dp
-    val elevation get() = 10.dp
+    val elevation get() = 8.dp
     val textTop get() = 5.dp
-    val textBottom get() = 5.dp
+    val textBottom get() = 10.dp
+    val textStart get() = 15.dp
+    val textEnd get() = 15.dp
+        //IMAGE
+        val imageHeight get() = 150.dp
+        val clipShape get() = 5.dp
     //DRAWERVIEW
     //HEADER
     //MARGINHEADER
@@ -46,7 +53,8 @@ interface IDimens {
     val horizontalSpace get() = 16.dp
     //DETAIL
         //PADDING
-        val paddingBetweenItems get() = 15.dp
+        val paddingBetweenScreen get() = 15.dp
+        val paddingBetweenItems get() = 7.5f.dp
 }
 
 object Dimens : IDimens

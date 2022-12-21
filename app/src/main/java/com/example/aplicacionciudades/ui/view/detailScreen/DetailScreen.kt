@@ -18,6 +18,8 @@ import androidx.navigation.NavController
 import com.example.aplicacionciudades.ui.res.Loading
 import com.example.aplicacionciudades.ui.utils.state.State
 import com.example.aplicacionciudades.ui.view.Error
+import com.example.aplicacionciudades.ui.view.detailScreen.items.DetailItem
+import com.example.aplicacionciudades.ui.view.detailScreen.items.MakeToolbarDetail
 import com.example.aplicacionciudades.ui.viewModel.DetailScreenVM
 
 
@@ -75,7 +77,7 @@ fun DetailScreen(
     )
 }
 
-fun onClick(esFav: Boolean, vm: DetailScreenVM) {
+private fun onClick(esFav: Boolean, vm: DetailScreenVM) {
     if (esFav) {
         vm.borrarFav()
     } else {
@@ -84,7 +86,7 @@ fun onClick(esFav: Boolean, vm: DetailScreenVM) {
 }
 
 @Composable
-fun Succcess(padding: PaddingValues, vm: DetailScreenVM) {
+private fun Succcess(padding: PaddingValues, vm: DetailScreenVM) {
     val urlState = vm.urlImagen.collectAsState()
     val url by remember { urlState }
     val descripcionState = vm.descripcion.collectAsState()

@@ -8,7 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import com.example.aplicacionciudades.model.consultaApiMain.FichaX
 import com.example.aplicacionciudades.ui.view.detailScreen.getDetailScreenRoute
-import com.example.aplicacionciudades.ui.view.mainScreen.cardsLugares.MakeItemPlaceList
+import com.example.aplicacionciudades.ui.view.mainScreen.items.cardsLugares.MakeItemPlaceList
 
 @Composable
 fun Success(navController: NavController, padding: PaddingValues, fichas: List<FichaX>) {

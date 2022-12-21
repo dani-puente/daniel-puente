@@ -18,7 +18,7 @@ class MainScreenVM @Inject constructor(
 ) : ViewModel(), CoroutineScope {
     override val coroutineContext = viewModelScope.coroutineContext
 
-    private val _detailState = MutableStateFlow< StateT<List<FichaX>>>(StateT.Idle)
+    private val _detailState = MutableStateFlow<StateT<List<FichaX>>>(StateT.Idle)
     val detailState = _detailState.asStateFlow()
 
 

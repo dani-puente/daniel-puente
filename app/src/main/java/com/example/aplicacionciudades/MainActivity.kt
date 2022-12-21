@@ -15,8 +15,8 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.aplicacionciudades.ui.res.AplicacionCiudadesTheme
 import com.example.aplicacionciudades.ui.view.detailScreen.DetailScreen
+import com.example.aplicacionciudades.ui.view.favsScreen.FavsScreen
 import com.example.aplicacionciudades.ui.view.mainScreen.MainScreen
-import com.example.aplicacionciudades.ui.view.screenFavs.FavsScreen
 import com.example.aplicacionciudades.ui.view.splashScreen.SplashScreen
 import dagger.hilt.android.AndroidEntryPoint
 

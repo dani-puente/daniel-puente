@@ -1,19 +1,16 @@
-package com.example.aplicacionciudades.ui.view.detailScreen
+package com.example.aplicacionciudades.ui.view.detailScreen.items
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shadow
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.style.TextAlign
 import coil.compose.AsyncImage
 import com.example.aplicacionciudades.R
 import com.example.aplicacionciudades.ui.res.Dimens
@@ -29,6 +26,11 @@ fun DetailItem(urlImagen: String?, descCorta: String?, urlsImagen: List<String?>
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(Dimens.heightHeader)
+                    .padding(
+                        horizontal = Dimens.paddingBetweenScreen,
+                        vertical = Dimens.paddingBetweenItems
+                    )
+                    .clip(MaterialTheme.shapes.large)
             )
         }
         stickyHeader {
@@ -40,14 +42,18 @@ fun DetailItem(urlImagen: String?, descCorta: String?, urlsImagen: List<String?>
             ) {
                 Text(
                     text = stringResource(R.string.descripcionCorta),
-                    style = TextStyle(
-                        fontSize = Dimens.titulo2,
-                        shadow = Shadow(
-                            color = Color.Black,
-                            offset = Offset(Dimens.offsetX, Dimens.offsetY),
-                            blurRadius = Dimens.blurRadius
-                        )
+                    style = MaterialTheme.typography.h5,
+                    modifier = Modifier.padding(
+                        horizontal = Dimens.paddingBetweenScreen,
+                        vertical = Dimens.paddingBetweenItems
                     )
+//                    TextStyle(
+//                        shadow = Shadow(
+//                            color = Color.Black,
+//                            offset = Offset(Dimens.offsetX, Dimens.offsetY),
+//                            blurRadius = Dimens.blurRadius
+//                        )
+//                    )
                 )
             }
         }
@@ -57,9 +63,11 @@ fun DetailItem(urlImagen: String?, descCorta: String?, urlsImagen: List<String?>
                     text = textDesc,
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(Dimens.paddingBetweenItems),
-                    fontSize = Dimens.texto,
-                    textAlign = TextAlign.Justify
+                        .padding(
+                            horizontal = Dimens.paddingBetweenScreen,
+                            vertical = Dimens.paddingBetweenItems
+                        ),
+                    style = MaterialTheme.typography.body1
                 )
             }
         }
@@ -71,14 +79,17 @@ fun DetailItem(urlImagen: String?, descCorta: String?, urlsImagen: List<String?>
             ) {
                 Text(
                     text = stringResource(R.string.galeria),
-                    style = TextStyle(
-                        fontSize = Dimens.titulo2,
-                        shadow = Shadow(
-                            color = Color.Black,
-                            offset = Offset(Dimens.offsetX, Dimens.offsetY),
-                            blurRadius = Dimens.blurRadius
-                        )
-                    )
+                    modifier = Modifier.padding(
+                        horizontal = Dimens.paddingBetweenScreen,
+                        vertical = Dimens.paddingBetweenItems
+                    ),
+                    style = MaterialTheme.typography.h5
+//                        shadow = Shadow(
+//                            color = Color.Black,
+//                            offset = Offset(Dimens.offsetX, Dimens.offsetY),
+//                            blurRadius = Dimens.blurRadius
+//                        )
+//                    )
                 )
             }
 
@@ -102,7 +113,10 @@ private fun Imagen(urlImagen: String?) {
         alignment = Alignment.Center,
         modifier = Modifier
             .fillMaxSize()
-            .padding(Dimens.paddingBetweenItems)
+            .padding(
+                horizontal = Dimens.paddingBetweenScreen,
+                vertical = Dimens.paddingBetweenItems
+            )
     )
 }
 
@@ -117,4 +131,3 @@ private fun GaleriaVacia() {
         Text(text = stringResource(R.string.galeriaVacia))
     }
 }
-

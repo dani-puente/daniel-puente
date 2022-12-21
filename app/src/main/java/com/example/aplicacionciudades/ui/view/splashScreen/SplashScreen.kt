@@ -12,14 +12,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavController
 import com.example.aplicacionciudades.R
 import com.example.aplicacionciudades.ui.res.Dimens
-import kotlinx.coroutines.delay
 
 @Composable
 fun SplashScreen(navController: NavController) {
     //Simulamos un delay de 2 segundos, el key indica un repintado automatico en JC, como solo queremos navegar despues del Splash
     //la indicamos a true, no sera una key que pueda mutar
     LaunchedEffect(key1 = true){
-        delay(2000)
+        //delay(2000)
         //Limpiamos el Stack de navegacion para que al dar atras no vuelva a la SplashScreen
         navController.popBackStack()
         //Mandamos a la aplicacion a la mainScreen

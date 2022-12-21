@@ -1,4 +1,4 @@
-package com.example.aplicacionciudades.ui.view.detailScreen
+package com.example.aplicacionciudades.ui.view.detailScreen.items
 
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton

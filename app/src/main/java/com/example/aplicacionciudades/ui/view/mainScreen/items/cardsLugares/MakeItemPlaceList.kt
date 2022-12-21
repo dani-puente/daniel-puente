@@ -1,11 +1,12 @@
-package com.example.aplicacionciudades.ui.view.mainScreen.cardsLugares
+package com.example.aplicacionciudades.ui.view.mainScreen.items.cardsLugares
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -24,13 +25,14 @@ fun MakeItemPlaceList(
     onClick: (item: FichaX) -> Unit
 ) {//En la lambda se pasa un objeto de tipo FichaX y te devuelve un objeto Unit
     //Misma funion que el Recycler, scroll en vertical
-    LazyColumn(
+    LazyVerticalGrid(
         modifier = Modifier
             .fillMaxSize()
-            .padding(Dimens.paddingCards)
+            .padding(Dimens.paddingCards),
+        columns = GridCells.Adaptive(Dimens.gridAdaptive)
     ) {
         //Indicamos, el numero de items que vamos a poner en el LazyColumn, en nuestro caso va a depender de la lista que nos pase la API
-        items(listaLugares.size) {
+        items(checkList(listaLugares)) {
             if (listaLugares.isEmpty()) {
                 EstaVacio()
             } else {
@@ -39,6 +41,15 @@ fun MakeItemPlaceList(
             }
         }
     }
+}
+
+fun checkList(list: List<FichaX>): Int{
+    val size: Int = if (list.isEmpty()){
+        1
+    } else{
+        list.size
+    }
+    return size
 }
 
 //@Preview(showBackground = true, showSystemUi = true)
